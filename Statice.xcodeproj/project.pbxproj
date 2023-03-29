@@ -41,6 +41,7 @@
 		CE0BD6AB29D407B3008B6CE5 /* search_v3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = search_v3.swift; sourceTree = "<group>"; };
 		CE0BD6AD29D407D9008B6CE5 /* nlt-fetchManyLatestWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "nlt-fetchManyLatestWords.swift"; sourceTree = "<group>"; };
 		CE0BD6AF29D4080A008B6CE5 /* SearchAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAll.swift; sourceTree = "<group>"; };
+		CE0BD6B129D44E22008B6CE5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE21B2F529CD460200D61772 /* CustomWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		CE21B2F829CD4BDA00D61772 /* Moji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moji.swift; sourceTree = "<group>"; };
 		CE21B2FA29CD563700D61772 /* MojiResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojiResultView.swift; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 		CE83A2BD29CC12FC00AA5D32 = {
 			isa = PBXGroup;
 			children = (
+				CE0BD6B129D44E22008B6CE5 /* README.md */,
 				CE83A2C829CC12FC00AA5D32 /* Statice */,
 				CE83A2C729CC12FC00AA5D32 /* Products */,
 			);
