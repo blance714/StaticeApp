@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum Dictionary: String, CaseIterable {
-    case Moji
-}
-
 struct SettingsView: View {
     @StateObject var ankiDataModel = AnkiDataModel()
     @StateObject var ankiSettingsModel = AnkiSettingsModel()
@@ -144,7 +140,7 @@ struct FieldsEditor: View {
                 let binding = ankiSettings.getNoteMapping(dictionary: dictionary.rawValue, field: field)
                     
                 NavigationLink {
-                    MappingEditor(value: binding)
+                    MappingEditor(value: binding, variables: DictionaryFieldVariables[dictionary] ?? [])
                         .navigationTitle(field)
                 } label: {
                     Text(field)

@@ -13,6 +13,7 @@
 		CE0BD6AC29D407B3008B6CE5 /* search_v3.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD6AB29D407B3008B6CE5 /* search_v3.swift */; };
 		CE0BD6AE29D407D9008B6CE5 /* nlt-fetchManyLatestWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD6AD29D407D9008B6CE5 /* nlt-fetchManyLatestWords.swift */; };
 		CE0BD6B029D4080A008B6CE5 /* SearchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD6AF29D4080A008B6CE5 /* SearchAll.swift */; };
+		CE0BD6B429D49C11008B6CE5 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD6B329D49C11008B6CE5 /* Search.swift */; };
 		CE21B2F629CD460200D61772 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F529CD460200D61772 /* CustomWKWebView.swift */; };
 		CE21B2F929CD4BDA00D61772 /* Moji.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F829CD4BDA00D61772 /* Moji.swift */; };
 		CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2FA29CD563700D61772 /* MojiResultView.swift */; };
@@ -31,6 +32,7 @@
 		CEAFCB1029CFEF5D00785432 /* WordResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB0F29CFEF5D00785432 /* WordResultView.swift */; };
 		CEAFCB1329CFF10500785432 /* WordSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB1229CFF10500785432 /* WordSearchManager.swift */; };
 		CEAFCB1529D0677C00785432 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB1429D0677C00785432 /* SearchBar.swift */; };
+		CEC66CF129D729F400E9D3CC /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF029D729F400E9D3CC /* Mapping.swift */; };
 		CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC687C229CC72C6000B306F /* Sugrec.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,7 @@
 		CE0BD6AD29D407D9008B6CE5 /* nlt-fetchManyLatestWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "nlt-fetchManyLatestWords.swift"; sourceTree = "<group>"; };
 		CE0BD6AF29D4080A008B6CE5 /* SearchAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAll.swift; sourceTree = "<group>"; };
 		CE0BD6B129D44E22008B6CE5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CE0BD6B329D49C11008B6CE5 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		CE21B2F529CD460200D61772 /* CustomWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		CE21B2F829CD4BDA00D61772 /* Moji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moji.swift; sourceTree = "<group>"; };
 		CE21B2FA29CD563700D61772 /* MojiResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojiResultView.swift; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		CEAFCB0F29CFEF5D00785432 /* WordResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResultView.swift; sourceTree = "<group>"; };
 		CEAFCB1229CFF10500785432 /* WordSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchManager.swift; sourceTree = "<group>"; };
 		CEAFCB1429D0677C00785432 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		CEC66CF029D729F400E9D3CC /* Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapping.swift; sourceTree = "<group>"; };
 		CEC687C229CC72C6000B306F /* Sugrec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sugrec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,11 +101,21 @@
 			path = Moji;
 			sourceTree = "<group>";
 		};
+		CE0BD6B229D49C05008B6CE5 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CE0BD6AA29D4077C008B6CE5 /* Moji */,
+				CE0BD6B329D49C11008B6CE5 /* Search.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		CE21B2F729CD4B9600D61772 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEC66CEF29D729E400E9D3CC /* Setting */,
+				CE0BD6B229D49C05008B6CE5 /* Search */,
 				CEC687C229CC72C6000B306F /* Sugrec.swift */,
-				CE0BD6AA29D4077C008B6CE5 /* Moji */,
 				CE7AC7D729D0DAA0007DDEB2 /* Anki.swift */,
 				CE9511B929D1F43B0001A0F0 /* AnkiModel.swift */,
 				CE0BD6A329D2E3BD008B6CE5 /* TextModel.swift */,
@@ -180,6 +194,14 @@
 				CEAFCB1229CFF10500785432 /* WordSearchManager.swift */,
 			);
 			path = WordSearch;
+			sourceTree = "<group>";
+		};
+		CEC66CEF29D729E400E9D3CC /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CEC66CF029D729F400E9D3CC /* Mapping.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +283,7 @@
 				CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */,
 				CEAFCB0E29CFEE7200785432 /* WordSearchView.swift in Sources */,
 				CEAFCB1329CFF10500785432 /* WordSearchManager.swift in Sources */,
+				CEC66CF129D729F400E9D3CC /* Mapping.swift in Sources */,
 				CE0BD6A929D40144008B6CE5 /* NSAttributedString.swift in Sources */,
 				CEAFCB1029CFEF5D00785432 /* WordResultView.swift in Sources */,
 				CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */,
@@ -273,6 +296,7 @@
 				CE0BD6AC29D407B3008B6CE5 /* search_v3.swift in Sources */,
 				CE21B2F629CD460200D61772 /* CustomWKWebView.swift in Sources */,
 				CEAFCB0C29CFEB6000785432 /* URLManager.swift in Sources */,
+				CE0BD6B429D49C11008B6CE5 /* Search.swift in Sources */,
 				CE9511BA29D1F43B0001A0F0 /* AnkiModel.swift in Sources */,
 				CE83A2CA29CC12FC00AA5D32 /* StaticeApp.swift in Sources */,
 			);

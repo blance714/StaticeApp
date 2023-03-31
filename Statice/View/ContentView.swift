@@ -32,7 +32,7 @@ It is a <b>bold</b> test! Happy!(?
 //        } else {
 //            WordSearchView(isBrowsingWebsite: $isBrowsingWebsite, animationNamespace: animationNamespace)
 //        }
-        MappingEditor(value: .constant(text))
+        MappingEditor(value: .constant(text), variables: MojiFieldVariables)
 //        Image(uiImage: createImageWithPinkBoxAndText(text: "23333"))
     }
 }

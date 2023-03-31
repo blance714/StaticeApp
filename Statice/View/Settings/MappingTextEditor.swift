@@ -10,6 +10,7 @@ import Foundation
 
 struct MappingTextEditor: UIViewRepresentable {
     @ObservedObject var textModel: TextModel
+    let variables: [AnkiFieldVariable]
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -17,6 +18,8 @@ struct MappingTextEditor: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
+        
+        print(variables)
         
         textView.backgroundColor = UIColor.init(white: 1, alpha: 0)
         
@@ -66,8 +69,11 @@ struct MappingTextEditor: UIViewRepresentable {
 }
 
 extension MappingTextEditor.Coordinator {
-    
+    /// Create keyboard toolbar
     func createCustomToolbar(_ textView: UITextView) -> UIToolbar {
+        
+        print(parent.variables)
+        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -87,40 +93,39 @@ extension MappingTextEditor.Coordinator {
             title: "Underline",
             image: UIImage(systemName: "underline")) { _ in self.parent.textModel.toggleUnderline() }
         
-        let attrMenu = UIMenu(
-            title: "Set Attribute",
-            image: UIImage(systemName: "bold.italic.underline"),
-            options: .displayInline,
-            children: [boldAction, italicAction, underlineAction])
-        let attrButton = UIBarButtonItem(title: "Set Attributes", image: UIImage(systemName: "bold.italic.underline"), menu: attrMenu)
+//        let attrMenu = UIMenu(
+//            title: "Set Attribute",
+//            image: UIImage(systemName: "bold.italic.underline"),
+//            options: .displayInline,
+//            children: [boldAction, italicAction, underlineAction])
+//        let attrButton = UIBarButtonItem(title: "Set Attributes", image: UIImage(systemName: "bold.italic.underline"), menu: attrMenu)
         
         let variablesMenu = UIMenu(
             title: "Add variables",
             subtitle: "It's a subtitle",
             image: UIImage(systemName: "chevron.left.slash.chevron.right"),
             options: .displayInline,
-            children: ["1", "2", "3"].map{ name in
-                UIAction(title: name,
-                         subtitle: "However!",
-                         image: UIImage(systemName: "bubbles.and.sparkles")
+            children: parent.variables.map{ variable in
+                UIAction(title: variable.title,
+                         subtitle: "[[\(variable.variable)]]",
+                         image: variable.image
                 ) {
-                    _ in print(name)
+                    _ in print(variable.title)
                 }
             })
         let variablesButton = UIBarButtonItem(title: "Variables", image: UIImage(systemName: "chevron.left.slash.chevron.right"), menu: variablesMenu)
         variablesButton.style = .plain
         
-        let testButton = UIBarButtonItem(title: "Test!", image: UIImage(systemName: "syringe"), menu: attrMenu)
-        
         let boldButton = UIBarButtonItem(primaryAction: boldAction)
         let italicButton = UIBarButtonItem(primaryAction: italicAction)
         let underlineButton = UIBarButtonItem(primaryAction: underlineAction)
         
-        toolbar.setItems([boldButton, italicButton, underlineButton, variablesButton, testButton, flexibleSpace, doneButton], animated: false)
+        toolbar.setItems([boldButton, italicButton, underlineButton, variablesButton, flexibleSpace, doneButton], animated: false)
         
         return toolbar
     }
     
+    /// Add custom edit menu element.
     func textView(_ textView: UITextView, editMenuForTextIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
         var additionalActions: [UIMenuElement] = []
         if range.length > 0 {
@@ -146,7 +151,7 @@ struct MappingTextEditor_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        MappingTextEditor(textModel: textModel)
+        MappingTextEditor(textModel: textModel, variables: MojiFieldVariables)
     }
     
 }

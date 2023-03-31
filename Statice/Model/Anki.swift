@@ -76,9 +76,3 @@ extension AnkiSettings: Codable {
         try container.encode(noteMapping, forKey: .noteMapping)
     }
 }
-
-protocol AnkiVariable {
-    let title: String
-    let variable: String
-    let image: UIImage?
-}

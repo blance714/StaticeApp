@@ -33,7 +33,9 @@ class WordSearchManager: ObservableObject {
                         SearchResult(
                             id: result.targetId,
                             title: result.title,
-                            excerpt: result.excerpt) }
+                            excerpt: result.excerpt,
+                            dictionary: .Moji
+                        ) }
                     print(json)
                 }
             }

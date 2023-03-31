@@ -11,16 +11,18 @@ struct MappingEditor: View {
     @Binding var value: String
     @StateObject var textModel: TextModel
     @State var bold = false
+    let variables: [AnkiFieldVariable]
     
-    init(value: Binding<String>) {
+    init(value: Binding<String>, variables: [AnkiFieldVariable]) {
         _value = value
         _textModel = StateObject(wrappedValue: TextModel(html: value.wrappedValue))
+        self.variables = variables
     }
     
     var body: some View {
         Group {
             if (textModel.attributedText != nil) {
-                MappingTextEditor(textModel: textModel)
+                MappingTextEditor(textModel: textModel, variables: variables)
 //                TextEditor(text: $value)
                     .scrollContentBackground(.hidden)
                     .padding(8)
@@ -47,7 +49,7 @@ struct MappingEditor_Previews: PreviewProvider {
             NavigationStack {
                 VStack {
                     Text(code)
-                    MappingEditor(value: $code)
+                    MappingEditor(value: $code, variables: MojiFieldVariables)
                 }
             }
         }
