@@ -6,7 +6,7 @@
 //
 
 ///Response of nlt-fetchManyLatestWords
-struct FetchWordsResponse: Codable {
+struct MojiFetchWordsResponse: Codable {
     var result: Result
     
     struct Result: Codable {
@@ -101,7 +101,7 @@ struct FetchWordsResponse: Codable {
     }
 }
 
-struct FetchWordsRequest: Codable {
+struct MojiFetchWordsRequest: Codable {
     let itemsJson: [ItemJson]
     let skipAccessories: Bool
     let _ApplicationId: String

@@ -59,8 +59,6 @@ struct MappingTextEditor: UIViewRepresentable {
                 self.parent.textModel.selectedRange = textView.selectedRange
             }
         }
-        
-        
 
         func printHTML(in textView: UITextView) {
             print(convertToHTMLString(attributedString: textView.attributedText))
@@ -110,7 +108,7 @@ extension MappingTextEditor.Coordinator {
                          subtitle: "[[\(variable.variable)]]",
                          image: variable.image
                 ) {
-                    _ in print(variable.title)
+                    _ in self.parent.textModel.insertText("[[\(variable.variable)]]")
                 }
             })
         let variablesButton = UIBarButtonItem(title: "Variables", image: UIImage(systemName: "chevron.left.slash.chevron.right"), menu: variablesMenu)

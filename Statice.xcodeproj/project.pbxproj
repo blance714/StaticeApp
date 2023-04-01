@@ -26,6 +26,7 @@
 		CE83A2D829CC131600AA5D32 /* URLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83A2D729CC131600AA5D32 /* URLSessionDelegate.swift */; };
 		CE9511BA29D1F43B0001A0F0 /* AnkiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9511B929D1F43B0001A0F0 /* AnkiModel.swift */; };
 		CE9511BC29D20EA50001A0F0 /* MappingTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9511BB29D20EA50001A0F0 /* MappingTextEditor.swift */; };
+		CEA586C829D8100F0076FF74 /* Published+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA586C729D8100F0076FF74 /* Published+Codable.swift */; };
 		CEAFCB0929CFEA7500785432 /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB0829CFEA7500785432 /* BrowserView.swift */; };
 		CEAFCB0C29CFEB6000785432 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB0B29CFEB6000785432 /* URLManager.swift */; };
 		CEAFCB0E29CFEE7200785432 /* WordSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB0D29CFEE7200785432 /* WordSearchView.swift */; };
@@ -33,6 +34,8 @@
 		CEAFCB1329CFF10500785432 /* WordSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB1229CFF10500785432 /* WordSearchManager.swift */; };
 		CEAFCB1529D0677C00785432 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB1429D0677C00785432 /* SearchBar.swift */; };
 		CEC66CF129D729F400E9D3CC /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF029D729F400E9D3CC /* Mapping.swift */; };
+		CEC66CF529D740DB00E9D3CC /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */; };
+		CEC66CF829D7415900E9D3CC /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF729D7415900E9D3CC /* TestData.swift */; };
 		CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC687C229CC72C6000B306F /* Sugrec.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +61,7 @@
 		CE83A2D729CC131600AA5D32 /* URLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDelegate.swift; sourceTree = "<group>"; };
 		CE9511B929D1F43B0001A0F0 /* AnkiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiModel.swift; sourceTree = "<group>"; };
 		CE9511BB29D20EA50001A0F0 /* MappingTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingTextEditor.swift; sourceTree = "<group>"; };
+		CEA586C729D8100F0076FF74 /* Published+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Codable.swift"; sourceTree = "<group>"; };
 		CEAFCB0629CF4CC900785432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CEAFCB0829CFEA7500785432 /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
 		CEAFCB0B29CFEB6000785432 /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 		CEAFCB1229CFF10500785432 /* WordSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchManager.swift; sourceTree = "<group>"; };
 		CEAFCB1429D0677C00785432 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		CEC66CF029D729F400E9D3CC /* Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapping.swift; sourceTree = "<group>"; };
+		CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
+		CEC66CF729D7415900E9D3CC /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = SOURCE_ROOT; };
 		CEC687C229CC72C6000B306F /* Sugrec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sugrec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +126,7 @@
 				CE9511B929D1F43B0001A0F0 /* AnkiModel.swift */,
 				CE0BD6A329D2E3BD008B6CE5 /* TextModel.swift */,
 				CE0BD6A829D40144008B6CE5 /* NSAttributedString.swift */,
+				CEA586C729D8100F0076FF74 /* Published+Codable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +151,7 @@
 		CE83A2C829CC12FC00AA5D32 /* Statice */ = {
 			isa = PBXGroup;
 			children = (
+				CEC66CF729D7415900E9D3CC /* TestData.swift */,
 				CEAFCB0629CF4CC900785432 /* Info.plist */,
 				CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */,
 				CEAFCB0729CFEA5500785432 /* View */,
@@ -173,6 +181,7 @@
 				CEAFCB1429D0677C00785432 /* SearchBar.swift */,
 				CEAFCB1129CFF0D900785432 /* WordSearch */,
 				CE0BD6A529D30EFD008B6CE5 /* Settings */,
+				CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -279,7 +288,9 @@
 				CEAFCB1529D0677C00785432 /* SearchBar.swift in Sources */,
 				CE0BD6B029D4080A008B6CE5 /* SearchAll.swift in Sources */,
 				CE0BD6AE29D407D9008B6CE5 /* nlt-fetchManyLatestWords.swift in Sources */,
+				CEA586C829D8100F0076FF74 /* Published+Codable.swift in Sources */,
 				CE83A2CC29CC12FC00AA5D32 /* ContentView.swift in Sources */,
+				CEC66CF529D740DB00E9D3CC /* AddNoteView.swift in Sources */,
 				CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */,
 				CEAFCB0E29CFEE7200785432 /* WordSearchView.swift in Sources */,
 				CEAFCB1329CFF10500785432 /* WordSearchManager.swift in Sources */,
@@ -292,6 +303,7 @@
 				CEAFCB0929CFEA7500785432 /* BrowserView.swift in Sources */,
 				CE21B2F929CD4BDA00D61772 /* Moji.swift in Sources */,
 				CE0BD6A429D2E3BD008B6CE5 /* TextModel.swift in Sources */,
+				CEC66CF829D7415900E9D3CC /* TestData.swift in Sources */,
 				CE83A2D829CC131600AA5D32 /* URLSessionDelegate.swift in Sources */,
 				CE0BD6AC29D407B3008B6CE5 /* search_v3.swift in Sources */,
 				CE21B2F629CD460200D61772 /* CustomWKWebView.swift in Sources */,

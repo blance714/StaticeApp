@@ -12,6 +12,8 @@ struct StaticeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(AnkiDataModel())
+                .environmentObject(AnkiSettingsModel())
         }
     }
 }

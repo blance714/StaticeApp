@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MojiResultView: View {
-    let searchResult: SearchResult
+    let searchResult: MojiSearchResult
 
-    @State var wordResult: FetchWordsResponse.Result.Word? = nil
+    @State var wordResult: MojiFetchWordsResponse.Result.Word? = nil
 
     var body: some View {
         let title = searchResult.title
@@ -44,8 +44,8 @@ struct MojiResultView: View {
     func fetchWord() {
         var request = URLRequest(
             url: URL(string: "https://api.mojidict.com/parse/functions/nlt-fetchManyLatestWords")!)
-        let requestBody = FetchWordsRequest(
-            itemsJson: [FetchWordsRequest.ItemJson(objectId: searchResult.id)],
+        let requestBody = MojiFetchWordsRequest(
+            itemsJson: [MojiFetchWordsRequest.ItemJson(objectId: searchResult.id)],
             skipAccessories: false,
             _ApplicationId: "E62VyFVLMiW7kvbtVq3p")
         let jsonData = try? JSONEncoder().encode(requestBody)
@@ -61,7 +61,7 @@ struct MojiResultView: View {
                 let string = String(data: data!, encoding: .utf8)
                 print(string)
                 do {
-                    let json = try JSONDecoder().decode(FetchWordsResponse.self, from: data!)
+                    let json = try JSONDecoder().decode(MojiFetchWordsResponse.self, from: data!)
                     wordResult = json.result.result[0]
                     print(json)
                 } catch let error {
@@ -72,9 +72,22 @@ struct MojiResultView: View {
     }
 }
 
+class MojiShowNoteViewAction: ObservableObject {
+    @Published var isSheetPresented = false
+    @Published var map: MojiFieldVariableMap! = nil
+    func show(map: MojiFieldVariableMap) {
+        self.map = map
+        isSheetPresented = true
+    }
+}
+
 struct MojiWordView: View {
     let title: String
-    let wordResult: FetchWordsResponse.Result.Word
+    let wordResult: MojiFetchWordsResponse.Result.Word
+    
+    @StateObject var showAction = MojiShowNoteViewAction()
+    
+    @Environment (\.scenePhase) private var scenePhase
 
     var body: some View {
         ScrollView {
@@ -89,6 +102,11 @@ struct MojiWordView: View {
             .cornerRadius(15)
             .padding(8)
         }
+        .sheet(isPresented: $showAction.isSheetPresented) {
+            AddNoteView(converter: MojiFieldVariableConverter(map: showAction.map), dictionary: .Moji)
+                .environment(\.scenePhase, scenePhase)
+        }
+        .environmentObject(showAction)
     }
 
     private var headerView: some View {
@@ -110,27 +128,45 @@ struct MojiWordView: View {
 
     private var wordDetailsView: some View {
         ForEach(wordResult.subdetails) { subdetail in
-            MojiSubdetailView(subdetail: subdetail, examples: wordResult.examples)
+            MojiSubdetailView(subdetail: subdetail, wordResult: wordResult)
         }
     }
 }
 
 struct MojiSubdetailView: View {
-    let subdetail: FetchWordsResponse.Result.Word.Subdetail
-    let examples: [FetchWordsResponse.Result.Word.Example]
-
+    let subdetail: MojiFetchWordsResponse.Result.Word.Subdetail
+    let wordResult: MojiFetchWordsResponse.Result.Word
+    
+    @EnvironmentObject var showAction: MojiShowNoteViewAction
+    
     var body: some View {
+        let examples = wordResult.examples
         VStack(alignment: .leading) {
-            Text(subdetail.title)
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(10)
-                .background(Color(.systemGray6))
-                .cornerRadius(10.0)
-                .padding(.top, 10)
+            HStack {
+                Text(subdetail.title)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(10)
+            .background(Color(.systemGray6))
+            .cornerRadius(10.0)
+            .contextMenu {
+                Button {
+                    let map = MojiFieldVariableMap(
+                        spell: wordResult.word.spell,
+                        pron: wordResult.word.pron,
+                        accent: wordResult.word.accent,
+                        define: subdetail.title,
+                        pos: wordResult.details[0].title)
+                    showAction.show(map: map)
+                } label: {
+                    Label("Add to Anki", systemImage: "plus")
+                }
+            }
+            .padding(.top, 10)
 
             ForEach(examples.filter { $0.subdetailsId == subdetail.id }) { example in
-                ExampleView(example: example)
+                ExampleView(subdetail: subdetail, wordResult: wordResult, example: example)
                     .padding(.leading, 7)
             }
         }
@@ -138,7 +174,11 @@ struct MojiSubdetailView: View {
 }
 
 struct ExampleView: View {
-    let example: FetchWordsResponse.Result.Word.Example
+    let subdetail: MojiFetchWordsResponse.Result.Word.Subdetail
+    let wordResult: MojiFetchWordsResponse.Result.Word
+    let example: MojiFetchWordsResponse.Result.Word.Example
+    
+    @EnvironmentObject var showAction: MojiShowNoteViewAction
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -156,12 +196,34 @@ struct ExampleView: View {
                 .foregroundColor(Color(.systemMint))
             , alignment: .leading
         )
+        .contextMenu {
+            Button {
+                let map = MojiFieldVariableMap(
+                    spell: wordResult.word.spell,
+                    pron: wordResult.word.pron,
+                    accent: wordResult.word.accent,
+                    define: subdetail.title,
+                    pos: wordResult.details[0].title,
+                    sentence: example.title,
+                    translation: example.trans)
+                showAction.show(map: map)
+            } label: {
+                Label("Add to Anki", systemImage: "plus")
+            }
+        } preview: {
+            VStack(alignment: .leading) {
+                Text(example.title)
+                Text(example.trans)
+                    .foregroundColor(Color(.systemPink))
+            }
+            .padding()
+        }
     }
 }
 
 struct MojiResult_Preview: PreviewProvider {
     static var previews: some View {
-        MojiResultView(searchResult: SearchResult(id: "198974907", title: "生きる", excerpt: "", dictionary: .Moji), wordResult: Statice.FetchWordsResponse.Result.Word(word: Statice.FetchWordsResponse.Result.Word.WordInfo(excerpt: "[自动·二类] 活，生存，保持生命。（命を持ち続ける。） 生活，维持生活，以……为生。（生活する。） ", spell: "生きる", accent: "②", pron: "いきる"), details: [Statice.FetchWordsResponse.Result.Word.Detail(title: "自动#二类")], subdetails: [Statice.FetchWordsResponse.Result.Word.Subdetail(title: "活，生存，保持生命。（命を持ち続ける。）", id: "86599"), Statice.FetchWordsResponse.Result.Word.Subdetail(title: "生活，维持生活，以……为生。（生活する。）", id: "86600"), Statice.FetchWordsResponse.Result.Word.Subdetail(title: "为……生活；生活于……之中。（生きがい。）", id: "86601"), Statice.FetchWordsResponse.Result.Word.Subdetail(title: "有生气，栩栩如生。（生き生きする。）", id: "86602"), Statice.FetchWordsResponse.Result.Word.Subdetail(title: "『成』，生动。", id: "86603")], examples: [Statice.FetchWordsResponse.Result.Word.Example(title: "希望に生きる。", trans: "生活在希望中。", subdetailsId: "86601", id: "63915"), Statice.FetchWordsResponse.Result.Word.Example(title: "この絵の人物はまるで生きているようだ。", trans: "画中人物简直是栩栩如生。", subdetailsId: "86603", id: "63918"), Statice.FetchWordsResponse.Result.Word.Example(title: "ペン1本で生きる。", trans: "靠一枝笔维持生活。", subdetailsId: "86600", id: "63912"), Statice.FetchWordsResponse.Result.Word.Example(title: "90歳まで生きる。", trans: "活到九十岁。", subdetailsId: "86599", id: "63905"), Statice.FetchWordsResponse.Result.Word.Example(title: "芸道一筋に生きた50年。", trans: "献身于艺术的五十年。", subdetailsId: "86601", id: "63916"), Statice.FetchWordsResponse.Result.Word.Example(title: "生きるための手段。", trans: "谋生的手段。", subdetailsId: "86600", id: "63913"), Statice.FetchWordsResponse.Result.Word.Example(title: "その色を塗ればずっと絵が生きてくる。", trans: "若涂上那种颜色画更生动了。", subdetailsId: "86603", id: "63919"), Statice.FetchWordsResponse.Result.Word.Example(title: "生きて帰る。", trans: "生还。", subdetailsId: "86599", id: "63906"), Statice.FetchWordsResponse.Result.Word.Example(title: "長く幸福に生きる。", trans: "幸福地生活下去。", subdetailsId: "86600", id: "63914"), Statice.FetchWordsResponse.Result.Word.Example(title: "彼女は一生を学童の教育に生きてきた。", trans: "她为儿童教育献出了一生。", subdetailsId: "86601", id: "63917"), Statice.FetchWordsResponse.Result.Word.Example(title: "パンダは何を食べて生きているのか？", trans: "熊猫吃什么活着？", subdetailsId: "86599", id: "63907"), Statice.FetchWordsResponse.Result.Word.Example(title: "生きている間にこの仕事を完成したい。", trans: "但愿在有生之年完成这项工作。", subdetailsId: "86599", id: "63908"), Statice.FetchWordsResponse.Result.Word.Example(title: "彼はもう長く生きられない。", trans: "他活不长了。", subdetailsId: "86599", id: "63909"), Statice.FetchWordsResponse.Result.Word.Example(title: "水がなければ1日も生きることはできない。", trans: "若没有水一天也活不了。", subdetailsId: "86599", id: "63910"), Statice.FetchWordsResponse.Result.Word.Example(title: "いまは生きるか死ぬかのせとぎわだ。", trans: "现在是生死关头。", subdetailsId: "86599", id: "63911")]))
+        MojiResultView(searchResult: MojiSearchResult(id: "198974907", title: "生きる", excerpt: ""), wordResult: wordResultTestData)
     }
 }
 

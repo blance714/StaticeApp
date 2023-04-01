@@ -8,7 +8,7 @@
 import Foundation
 
 class WordSearchManager: ObservableObject {
-    @Published var searchResult: [SearchResult] = []
+    @Published var searchResult: [any SearchResult] = []
     
     func handleSearch(searchText: String) {
         searchResult = []
@@ -30,11 +30,10 @@ class WordSearchManager: ObservableObject {
                 print(string)
                 if let json = try? JSONDecoder().decode(SearchAllResponse.self, from: data!) {
                     self.searchResult = json.result.result.word.searchResult.map { result in
-                        SearchResult(
+                        MojiSearchResult(
                             id: result.targetId,
                             title: result.title,
-                            excerpt: result.excerpt,
-                            dictionary: .Moji
+                            excerpt: result.excerpt
                         ) }
                     print(json)
                 }

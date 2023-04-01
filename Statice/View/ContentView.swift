@@ -19,7 +19,7 @@ struct ContentView: View {
     @Namespace private var animationNamespace
     @State var isBrowsingWebsite = false
     @StateObject var urlManager = URLManager()
-    @State var isOpenUrl = false
+    @State var isOpenUrl = true
     @State var string = ""
     let text = """
 Hello! Test! <br/>
@@ -27,13 +27,11 @@ It is a <b>bold</b> test! Happy!(?
 """
     
     var body: some View {
-//        if (isBrowsingWebsite) {
-//            BrowserView(animationNamespace: animationNamespace)
-//        } else {
-//            WordSearchView(isBrowsingWebsite: $isBrowsingWebsite, animationNamespace: animationNamespace)
-//        }
-        MappingEditor(value: .constant(text), variables: MojiFieldVariables)
-//        Image(uiImage: createImageWithPinkBoxAndText(text: "23333"))
+        if (isBrowsingWebsite) {
+            BrowserView(animationNamespace: animationNamespace)
+        } else {
+            WordSearchView(isBrowsingWebsite: $isBrowsingWebsite, animationNamespace: animationNamespace)
+        }
     }
 }
 

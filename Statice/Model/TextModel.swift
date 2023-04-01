@@ -74,4 +74,13 @@ class TextModel: ObservableObject {
         
         attributedText = mutableAttributedText
     }
+    
+    func insertText(_ text: String) {
+        let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+        mutableAttributedText.replaceCharacters(in: selectedRange, with: text)
+        
+        attributedText = mutableAttributedText
+        selectedRange = NSMakeRange(selectedRange.location + text.count, 0)
+    }
+    
 }

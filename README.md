@@ -12,9 +12,11 @@ A iOS application for adding new words to Anki while reading novels.
     - [ ] 增加收藏
   - [ ] 与Anki交互
     - [x] 获取数据
-    - [ ] 编辑转换规则 ！
-      - [ ] 规则编辑器
+    - [x] 编辑转换规则 ！
+      - [x] 规则编辑器
       - [x] 定义字段
-      - [ ] 字段转换
+      - [x] 字段转换
+    - [x] 添加笔记到Anki
+    - [ ] 改进规则编辑器：变量块
   - [x] 单词查询
   - [ ] 句子查询

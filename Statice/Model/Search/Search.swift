@@ -12,19 +12,15 @@ enum Dictionary: String, CaseIterable {
     case Moji
 }
 
-struct SearchResult: Identifiable, Hashable {
-    let id: String
-    let title: String
-    let excerpt: String
-    let dictionary: Dictionary
+protocol SearchResult {
+    var id: String { get }
+    var title: String { get }
+    var excerpt: String { get }
+    var dictionary: Dictionary { get }
+    
+    func getView() -> AnyView
 }
 
-struct SearchResultView: View {
-    let searchResult: SearchResult
-    
-    var body: some View {
-        switch searchResult.dictionary {
-        case .Moji: MojiResultView(searchResult: searchResult)
-        }
-    }
+protocol AnkiFieldVariableConverter {
+    func convert(_ text: String) -> String
 }
