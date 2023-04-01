@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MojiResultView: View {
     let searchResult: MojiSearchResult
+    let translationResult: TranslationResult?
 
     @State var wordResult: MojiFetchWordsResponse.Result.Word? = nil
 
@@ -17,7 +18,10 @@ struct MojiResultView: View {
         let id = searchResult.id
         Group {
             if let wordResult = wordResult {
-                MojiWordView(title: title, wordResult: wordResult)
+                MojiWordView(
+                    title: title,
+                    wordResult: wordResult,
+                    translationResult: translationResult)
             } else {
                 loadingView
             }
@@ -84,6 +88,7 @@ class MojiShowNoteViewAction: ObservableObject {
 struct MojiWordView: View {
     let title: String
     let wordResult: MojiFetchWordsResponse.Result.Word
+    let translationResult: TranslationResult?
     
     @StateObject var showAction = MojiShowNoteViewAction()
     
@@ -128,7 +133,10 @@ struct MojiWordView: View {
 
     private var wordDetailsView: some View {
         ForEach(wordResult.subdetails) { subdetail in
-            MojiSubdetailView(subdetail: subdetail, wordResult: wordResult)
+            MojiSubdetailView(
+                subdetail: subdetail,
+                wordResult: wordResult,
+                translationResult: translationResult)
         }
     }
 }
@@ -136,6 +144,7 @@ struct MojiWordView: View {
 struct MojiSubdetailView: View {
     let subdetail: MojiFetchWordsResponse.Result.Word.Subdetail
     let wordResult: MojiFetchWordsResponse.Result.Word
+    let translationResult: TranslationResult?
     
     @EnvironmentObject var showAction: MojiShowNoteViewAction
     
@@ -157,7 +166,10 @@ struct MojiSubdetailView: View {
                         pron: wordResult.word.pron,
                         accent: wordResult.word.accent,
                         define: subdetail.title,
-                        pos: wordResult.details[0].title)
+                        pos: wordResult.details[0].title,
+                        sentence: translationResult?.bold,
+                        translation: translationResult?.translation
+                    )
                     showAction.show(map: map)
                 } label: {
                     Label("Add to Anki", systemImage: "plus")
@@ -223,7 +235,7 @@ struct ExampleView: View {
 
 struct MojiResult_Preview: PreviewProvider {
     static var previews: some View {
-        MojiResultView(searchResult: MojiSearchResult(id: "198974907", title: "生きる", excerpt: ""), wordResult: wordResultTestData)
+        MojiResultView(searchResult: MojiSearchResult(id: "198974907", title: "生きる", excerpt: ""), translationResult: translationResultTestData, wordResult: wordResultTestData)
     }
 }
 

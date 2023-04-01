@@ -19,4 +19,4 @@ A iOS application for adding new words to Anki while reading novels.
     - [x] 添加笔记到Anki
     - [ ] 改进规则编辑器：变量块
   - [x] 单词查询
-  - [ ] 句子查询
+  - [x] 句子查询

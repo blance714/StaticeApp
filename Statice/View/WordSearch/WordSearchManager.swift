@@ -9,8 +9,9 @@ import Foundation
 
 class WordSearchManager: ObservableObject {
     @Published var searchResult: [any SearchResult] = []
+    @Published var translationResult: TranslationResult? = nil
     
-    func handleSearch(searchText: String) {
+    func handleSearch(searchText: String, sentenceSelection: SentenceSelection? = nil) {   //TODO: translate sentence
         searchResult = []
         var request = URLRequest(
             url: URL(string: "https://api.mojidict.com/parse/functions/search-all")!)
@@ -22,6 +23,10 @@ class WordSearchManager: ObservableObject {
         request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
         
+        if let selection = sentenceSelection {
+            handleTranslate(sentence: selection.sentence, bold: selection.bold)
+        }
+        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
                 print("fetch error")
@@ -29,15 +34,30 @@ class WordSearchManager: ObservableObject {
                 let string = String(data: data!, encoding: .utf8)
                 print(string)
                 if let json = try? JSONDecoder().decode(SearchAllResponse.self, from: data!) {
-                    self.searchResult = json.result.result.word.searchResult.map { result in
-                        MojiSearchResult(
-                            id: result.targetId,
-                            title: result.title,
-                            excerpt: result.excerpt
-                        ) }
-                    print(json)
+                    DispatchQueue.main.async {
+                        self.searchResult = json.result.result.word.searchResult.map { result in
+                            MojiSearchResult(
+                                id: result.targetId,
+                                title: result.title,
+                                excerpt: result.excerpt
+                            ) }
+                        print(json)
+                    }
                 }
             }
         }.resume()
+    }
+    
+    func handleTranslate(sentence: String, bold: String?) {
+        translationResult = TranslationResult(sentence: sentence, bold: bold)
+        youdaoTranslateSentence(param: sentence) { translation in
+            print("callback")
+            DispatchQueue.main.async {
+                self.translationResult = TranslationResult(
+                    sentence: sentence,
+                    bold: bold,
+                    translation: translation)
+            }
+        }
     }
 }

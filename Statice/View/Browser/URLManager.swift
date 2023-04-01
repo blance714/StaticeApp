@@ -8,7 +8,11 @@
 import Foundation
 
 class URLManager: ObservableObject {
-    @Published var url: URL = URL(string: "about:blank")!
+    @Published var url: URL
+    
+    init(url: URL = URL(string: "about:blank")!) {
+        self.url = url
+    }
     
     func handleURLRequest(urlText: String) {
         var url = URL(string: urlText)

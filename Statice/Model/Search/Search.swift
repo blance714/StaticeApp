@@ -18,9 +18,15 @@ protocol SearchResult {
     var excerpt: String { get }
     var dictionary: Dictionary { get }
     
-    func getView() -> AnyView
+    func getView(_: TranslationResult?) -> AnyView
 }
 
 protocol AnkiFieldVariableConverter {
     func convert(_ text: String) -> String
+}
+
+struct TranslationResult {
+    var sentence: String
+    var bold: String?
+    var translation: String?
 }

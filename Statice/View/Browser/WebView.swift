@@ -1,92 +1,46 @@
 //
-//  CustomWKWebkit.swift
+//  WebView.swift
 //  Statice
 //
-//  Created by blance on 2023/3/24.
+//  Created by blance on 2023/4/1.
 //
 
-import Foundation
-import WebKit
 import SwiftUI
-import Combine
-
-class CustomWKWebView: WKWebView {
-    var handleSearch: ((String) -> Void)?
-    
-    init(handleSearch: ((String) -> Void)?) {
-        self.handleSearch = handleSearch
-        let configuration = WKWebViewConfiguration()
-        super.init(frame: .zero, configuration: configuration)
-        setupCustomMenu() 
-        print("init wk")
-    }
-    
-    override init(frame: CGRect, configuration: WKWebViewConfiguration) {
-        super.init(frame: frame, configuration: configuration)
-        setupCustomMenu()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupCustomMenu() {
-        let customMenuItem = UIMenuItem(title: "自定义操作", action: #selector(customAction(_:)))
-        UIMenuController.shared.menuItems = [customMenuItem]
-    }
-
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if action == #selector(copy(_:)) || action == #selector(paste(_:)) || action == #selector(customAction(_:)) {
-            return true
-        }
-        return false
-    }
-
-    @objc func customAction(_ sender: Any?) {
-        // 在这里执行你的自定义操作
-        print("自定义操作")
-        evaluateJavaScript("window.getSelection().toString()") { (result, error) in
-            if let text = result as? String {
-                self.handleSearch?(text)
-            } else if let error = error {
-                print("获取选中文本时出错：\(error)")
-            }
-        }
-    }
-}
+import WebKit
 
 struct WebView: UIViewRepresentable {
     @Binding var url: URL
-    let handleSearch: ((String) -> Void)?
-
+    let handleSearch: ((String, SentenceSelection) -> Void)?
+    let handleTranslate: ((String) -> Void)?
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self, url: $url)
     }
-
+    
     func makeUIView(context: Context) -> CustomWKWebView {
         print("233")
-        let webView = CustomWKWebView(handleSearch: handleSearch)
+        let webView = CustomWKWebView(handleSearch: handleSearch, handleTranslate: handleTranslate)
         webView.navigationDelegate = context.coordinator
-        webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Mobile/15E148 Safari/604.1"
         
         webView.configuration.userContentController.add(ContentController(url: $url), name: "urlChanged")
         return webView
     }
-
+    
     func updateUIView(_ webView: CustomWKWebView, context: Context) {
         if webView.url != url {
             print("load")
             webView.load(URLRequest(url: url))
         }
     }
-    
+
+    /// urlChange js handler
     class ContentController: NSObject, WKScriptMessageHandler {
         @Binding var url: URL
-        
+
         init(url: Binding<URL>) {
             _url = url
         }
-        
+
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             if message.name == "urlChanged", let urlString = message.body as? String {
                 print("URL 变更：\(urlString)")
@@ -100,7 +54,7 @@ struct WebView: UIViewRepresentable {
     class Coordinator: NSObject, WKNavigationDelegate {
         var parent: WebView
         @Binding var url: URL
-
+        
         init(_ parent: WebView, url: Binding<URL>) {
             self.parent = parent
             _url = url
@@ -129,22 +83,22 @@ struct WebView: UIViewRepresentable {
             (function() {
                 var pushState = history.pushState;
                 var replaceState = history.replaceState;
-
+            
                 history.pushState = function(state, title, url) {
                     pushState.apply(history, [state, title, url]);
                     window.dispatchEvent(new Event('locationchange'));
                 };
-
+            
                 history.replaceState = function(state, title, url) {
                     replaceState.apply(history, [state, title, url]);
                     window.dispatchEvent(new Event('locationchange'));
                 };
-
+            
                 window.addEventListener('locationchange', function() {
                     webkit.messageHandlers.urlChanged.postMessage(window.location.href);
                     alert("changed.")
                 });
-
+            
                 window.addEventListener('popstate', function() {
                     webkit.messageHandlers.urlChanged.postMessage(window.location.href);
                     alert("changed.")
@@ -153,7 +107,7 @@ struct WebView: UIViewRepresentable {
             """
             webView.evaluateJavaScript(script, completionHandler: nil)
         }
-
+        
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("加载完成：\(String(describing: webView.url))")
         }
@@ -161,5 +115,11 @@ struct WebView: UIViewRepresentable {
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
             print("加载失败：\(String(describing: webView.url)), Error: \(error.localizedDescription)")
         }
+    }
+}
+
+struct WebView_Previews: PreviewProvider {
+    static var previews: some View {
+        WebView(url: .constant(URL(string: "https://bing.com")!), handleSearch: nil, handleTranslate: nil)
     }
 }

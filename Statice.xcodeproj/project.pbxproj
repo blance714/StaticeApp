@@ -27,6 +27,8 @@
 		CE9511BA29D1F43B0001A0F0 /* AnkiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9511B929D1F43B0001A0F0 /* AnkiModel.swift */; };
 		CE9511BC29D20EA50001A0F0 /* MappingTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9511BB29D20EA50001A0F0 /* MappingTextEditor.swift */; };
 		CEA586C829D8100F0076FF74 /* Published+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA586C729D8100F0076FF74 /* Published+Codable.swift */; };
+		CEA586CC29D82D880076FF74 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA586CB29D82D880076FF74 /* WebView.swift */; };
+		CEA586CE29D8475A0076FF74 /* Youdao.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA586CD29D8475A0076FF74 /* Youdao.swift */; };
 		CEAFCB0929CFEA7500785432 /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB0829CFEA7500785432 /* BrowserView.swift */; };
 		CEAFCB0C29CFEB6000785432 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB0B29CFEB6000785432 /* URLManager.swift */; };
 		CEAFCB0E29CFEE7200785432 /* WordSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFCB0D29CFEE7200785432 /* WordSearchView.swift */; };
@@ -37,6 +39,7 @@
 		CEC66CF529D740DB00E9D3CC /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */; };
 		CEC66CF829D7415900E9D3CC /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF729D7415900E9D3CC /* TestData.swift */; };
 		CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC687C229CC72C6000B306F /* Sugrec.swift */; };
+		CEE3720B29D88A3F00D7E992 /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3720A29D88A3F00D7E992 /* TranslationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,8 @@
 		CE9511B929D1F43B0001A0F0 /* AnkiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiModel.swift; sourceTree = "<group>"; };
 		CE9511BB29D20EA50001A0F0 /* MappingTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingTextEditor.swift; sourceTree = "<group>"; };
 		CEA586C729D8100F0076FF74 /* Published+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Codable.swift"; sourceTree = "<group>"; };
+		CEA586CB29D82D880076FF74 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		CEA586CD29D8475A0076FF74 /* Youdao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youdao.swift; sourceTree = "<group>"; };
 		CEAFCB0629CF4CC900785432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CEAFCB0829CFEA7500785432 /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
 		CEAFCB0B29CFEB6000785432 /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 		CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		CEC66CF729D7415900E9D3CC /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = SOURCE_ROOT; };
 		CEC687C229CC72C6000B306F /* Sugrec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sugrec.swift; sourceTree = "<group>"; };
+		CEE3720A29D88A3F00D7E992 /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,7 @@
 			children = (
 				CE0BD6AA29D4077C008B6CE5 /* Moji */,
 				CE0BD6B329D49C11008B6CE5 /* Search.swift */,
+				CEA586CD29D8475A0076FF74 /* Youdao.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -155,7 +162,6 @@
 				CEAFCB0629CF4CC900785432 /* Info.plist */,
 				CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */,
 				CEAFCB0729CFEA5500785432 /* View */,
-				CE21B2F529CD460200D61772 /* CustomWKWebView.swift */,
 				CE21B2F729CD4B9600D61772 /* Model */,
 				CE83A2D729CC131600AA5D32 /* URLSessionDelegate.swift */,
 				CE83A2CD29CC12FD00AA5D32 /* Assets.xcassets */,
@@ -182,6 +188,7 @@
 				CEAFCB1129CFF0D900785432 /* WordSearch */,
 				CE0BD6A529D30EFD008B6CE5 /* Settings */,
 				CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */,
+				CEE3720A29D88A3F00D7E992 /* TranslationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,7 +196,9 @@
 		CEAFCB0A29CFEB3C00785432 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
+				CE21B2F529CD460200D61772 /* CustomWKWebView.swift */,
 				CEAFCB0829CFEA7500785432 /* BrowserView.swift */,
+				CEA586CB29D82D880076FF74 /* WebView.swift */,
 				CEAFCB0B29CFEB6000785432 /* URLManager.swift */,
 			);
 			path = Browser;
@@ -283,6 +292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA586CE29D8475A0076FF74 /* Youdao.swift in Sources */,
+				CEE3720B29D88A3F00D7E992 /* TranslationView.swift in Sources */,
 				CE7AC7D829D0DAA0007DDEB2 /* Anki.swift in Sources */,
 				CE0BD6A729D30F17008B6CE5 /* MappingEditor.swift in Sources */,
 				CEAFCB1529D0677C00785432 /* SearchBar.swift in Sources */,
@@ -302,6 +313,7 @@
 				CE7AC7D629D0C533007DDEB2 /* SettingsView.swift in Sources */,
 				CEAFCB0929CFEA7500785432 /* BrowserView.swift in Sources */,
 				CE21B2F929CD4BDA00D61772 /* Moji.swift in Sources */,
+				CEA586CC29D82D880076FF74 /* WebView.swift in Sources */,
 				CE0BD6A429D2E3BD008B6CE5 /* TextModel.swift in Sources */,
 				CEC66CF829D7415900E9D3CC /* TestData.swift in Sources */,
 				CE83A2D829CC131600AA5D32 /* URLSessionDelegate.swift in Sources */,

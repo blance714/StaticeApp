@@ -69,9 +69,6 @@ struct MappingTextEditor: UIViewRepresentable {
 extension MappingTextEditor.Coordinator {
     /// Create keyboard toolbar
     func createCustomToolbar(_ textView: UITextView) -> UIToolbar {
-        
-        print(parent.variables)
-        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -118,7 +115,7 @@ extension MappingTextEditor.Coordinator {
         let italicButton = UIBarButtonItem(primaryAction: italicAction)
         let underlineButton = UIBarButtonItem(primaryAction: underlineAction)
         
-        toolbar.setItems([boldButton, italicButton, underlineButton, variablesButton, flexibleSpace, doneButton], animated: false)
+        toolbar.setItems([boldButton, italicButton, underlineButton, variablesButton, flexibleSpace, doneButton], animated: true)
         
         return toolbar
     }

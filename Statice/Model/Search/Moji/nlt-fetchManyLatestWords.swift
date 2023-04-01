@@ -10,12 +10,11 @@ struct MojiFetchWordsResponse: Codable {
     var result: Result
     
     struct Result: Codable {
-        var one: [String]
+//        var one: [String]
         var result: [Word]
         var code: Int
         
         enum CodingKeys: String, CodingKey {
-            case one = "1"
             case result = "result"
             case code = "code"
         }

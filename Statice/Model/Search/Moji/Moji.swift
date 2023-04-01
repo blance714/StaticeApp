@@ -19,7 +19,9 @@ struct MojiSearchResult: SearchResult {
     let title: String
     let excerpt: String
     let dictionary = Dictionary.Moji
-    func getView() -> AnyView { return AnyView(MojiResultView(searchResult: self)) }
+    func getView(_ translationResult: TranslationResult?) -> AnyView {
+        return AnyView(MojiResultView(searchResult: self, translationResult: translationResult))
+    }
 }
 
 let MojiFieldVariables: [AnkiFieldVariable] = [
