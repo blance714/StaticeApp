@@ -13,13 +13,21 @@ import Combine
 class CustomWKWebView: WKWebView {
     var handleSearch: ((String, SentenceSelection) -> Void)?
     var handleTranslate: ((String) -> Void)?
+    var urlObservation: NSKeyValueObservation?
     
     init(handleSearch: ((String, SentenceSelection) -> Void)?, handleTranslate: ((String) -> Void)?) {
         self.handleSearch = handleSearch
         self.handleTranslate = handleTranslate
         
+//        urlObservation = observe(\.backForwardList, options: [.old, .new]) {
+//
+//        }
+        
         let configuration = WKWebViewConfiguration()
         super.init(frame: .zero, configuration: configuration)
+        
+        urlObservation = backForwardList.observe(\.backList, options: [.old, .new]) { _, _ in print("observe!")}
+        
         setupCustomMenu() 
         print("init wk")
     }
@@ -39,6 +47,13 @@ extension CustomWKWebView {
         let searchWordMenuItem = UIMenuItem(title: "Search", action: #selector(searchWordAction(_:)))
         let translateMenuItem = UIMenuItem(title: "Translate", action: #selector(translateAction(_:)))
         UIMenuController.shared.menuItems = [searchWordMenuItem, translateMenuItem]
+    }
+    
+    override func buildMenu(with builder: UIMenuBuilder) {
+        if builder.menu(for: .lookup) != nil {
+            builder.remove(menu: .lookup)
+        }
+        super.buildMenu(with: builder)
     }
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {

@@ -14,6 +14,7 @@ struct StaticeApp: App {
             ContentView()
                 .environmentObject(AnkiDataModel())
                 .environmentObject(AnkiSettingsModel())
+                .environmentObject(DataModel<FavouriteSitesSetting>(dataFileName: "favouriteSitesSetting"))
         }
     }
 }

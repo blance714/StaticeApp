@@ -133,17 +133,15 @@ struct FieldsEditor: View {
     @Binding var dictionary: Dictionary
     
     var body: some View {
-        let fields = (ankiData.notetypes.first(where: { $0.name == ankiSettings.noteType })?.fields.map { $0.name }) ?? []
+        let fields = (ankiData.notetypes.first(where: { $0.name == ankiSettings.noteType })?.fields) ?? []
         
         Section {
             ForEach(fields, id: \.self) { field in
-                let binding = ankiSettings.getNoteMapping(dictionary: dictionary.rawValue, field: field)
-                    
-                NavigationLink {
-                    MappingEditor(value: binding, variables: DictionaryFieldVariables[dictionary] ?? [])
-                        .navigationTitle(field)
-                } label: {
-                    Text(field)
+                NavigationLink(field.name) {
+                    let binding = ankiSettings.getNoteMapping(dictionary: dictionary.rawValue, field: field.name)
+                    let variables = DictionaryFieldVariables[dictionary] ?? []
+                    MappingEditor(value: binding, variables: variables)
+                        .navigationTitle(field.name)
                 }
             }
         } header: {

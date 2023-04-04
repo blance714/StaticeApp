@@ -18,13 +18,6 @@ import SwiftUI
 struct ContentView: View {
     @Namespace private var animationNamespace
     @State var isBrowsingWebsite = false
-    @StateObject var urlManager = URLManager()
-    @State var isOpenUrl = true
-    @State var string = ""
-    let text = """
-Hello! Test! <br/>
-It is a <b>bold</b> test! Happy!(?
-"""
     
     var body: some View {
         if (isBrowsingWebsite) {

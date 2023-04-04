@@ -14,24 +14,24 @@ struct MappingEditor: View {
     let variables: [AnkiFieldVariable]
     
     init(value: Binding<String>, variables: [AnkiFieldVariable]) {
+        print("MappingEditor")
         _value = value
-        _textModel = StateObject(wrappedValue: TextModel(html: value.wrappedValue))
+        _textModel = StateObject(wrappedValue: TextModel(string: value.wrappedValue))
         self.variables = variables
     }
     
     var body: some View {
         Group {
-            if (textModel.attributedText != nil) {
+            VStack {
                 MappingTextEditor(textModel: textModel, variables: variables)
-//                TextEditor(text: $value)
                     .scrollContentBackground(.hidden)
                     .padding(8)
+                    .onAppear {
+                        textModel.load(string: value)
+                    }
                     .onDisappear {
                         textModel.save(to: $value)
                     }
-            } else {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .background(Color(.secondarySystemGroupedBackground))

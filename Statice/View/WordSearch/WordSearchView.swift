@@ -16,11 +16,11 @@ struct WordSearchView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0.0) {
-                WordResultView(searchResult: wordSearchManager.searchResult, translationResult: nil)
+                WordResultView(wordSearchManager: wordSearchManager)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                SearchBar(animationNamespace: animationNamespace, handleSubmit: {str in 
+                SearchBar(handleSubmit: {str in
                     wordSearchManager.handleSearch(searchText: str)
-                }, isBrowsingWebsite: false)
+                }, animationNamespace: animationNamespace)
             }
             .navigationTitle("Search")
             .toolbar {
@@ -47,7 +47,7 @@ struct WordSearchView: View {
             }
         }
         .onAppear {
-            wordSearchManager.handleSearch(searchText: "")
+            wordSearchManager.handleSearch(searchText: "スターチス")
         }
     }
 }

@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct WordResultView: View {
-    let searchResult: [any SearchResult]
-    let translationResult: TranslationResult?
+    @ObservedObject var wordSearchManager: WordSearchManager
+    
+    private var translationResult: TranslationResult? {
+        wordSearchManager.translationResult
+    }
     
     var body: some View {
         VStack {
@@ -25,8 +28,11 @@ struct WordResultView: View {
     }
     
     var words: some View {
-        Section {
-            if (searchResult.count != 0) {
+        let searchResult = wordSearchManager.searchResult
+        let isSearching = wordSearchManager.isSearching
+        
+        return Section {
+            if searchResult.count != 0 {
                 ForEach(searchResult, id: \.id) { result in
                     NavigationLink {
                         result.getView(translationResult)
@@ -44,9 +50,16 @@ struct WordResultView: View {
                     }
                 }
             } else {
-                ProgressView()
-                    .padding()
-                    .frame(maxWidth: .infinity)
+                if isSearching {
+                    ProgressView()
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                } else {
+                    Text("No result.")
+                        .foregroundColor(Color(.secondaryLabel))
+                        .italic()
+//                        .frame(maxWidth: .infinity)
+                }
             }
         } header: {
             if translationResult != nil {
@@ -99,7 +112,7 @@ struct WordResultView: View {
 struct WordResultView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            WordResultView(searchResult: [], translationResult: translationResultTestData)
+            WordResultView(wordSearchManager: WordSearchManager())
         }
     }
 }

@@ -32,10 +32,7 @@ struct MappingTextEditor: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextView, context: Context) {
-        print("updateUIView equal: \(uiView.attributedText.isHTMLEqual(to: textModel.attributedText))")
-        if !uiView.attributedText.isHTMLEqual(to: textModel.attributedText) {
-            uiView.attributedText = textModel.attributedText
-        }
+        uiView.text = textModel.text
         uiView.selectedRange = textModel.selectedRange
     }
     
@@ -49,7 +46,7 @@ struct MappingTextEditor: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             print("textViewDidChange")
             DispatchQueue.main.async {
-                self.parent.textModel.attributedText = textView.attributedText
+                self.parent.textModel.text = textView.text
             }
         }
         
@@ -77,24 +74,6 @@ extension MappingTextEditor.Coordinator {
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        
-        let boldAction = UIAction(
-            title: "Bold",
-            image: UIImage(systemName: "bold")) { _ in self.parent.textModel.toggleTrait(trait: .traitBold) }
-        let italicAction = UIAction(
-            title: "Italic",
-            image: UIImage(systemName: "italic")) { _ in self.parent.textModel.toggleTrait(trait: .traitItalic) }
-        let underlineAction = UIAction(
-            title: "Underline",
-            image: UIImage(systemName: "underline")) { _ in self.parent.textModel.toggleUnderline() }
-        
-//        let attrMenu = UIMenu(
-//            title: "Set Attribute",
-//            image: UIImage(systemName: "bold.italic.underline"),
-//            options: .displayInline,
-//            children: [boldAction, italicAction, underlineAction])
-//        let attrButton = UIBarButtonItem(title: "Set Attributes", image: UIImage(systemName: "bold.italic.underline"), menu: attrMenu)
-        
         let variablesMenu = UIMenu(
             title: "Add variables",
             subtitle: "It's a subtitle",
@@ -103,7 +82,7 @@ extension MappingTextEditor.Coordinator {
             children: parent.variables.map{ variable in
                 UIAction(title: variable.title,
                          subtitle: "[[\(variable.variable)]]",
-                         image: variable.image
+                         image: variable.systemImage != nil ? UIImage(systemName: variable.systemImage!) : nil
                 ) {
                     _ in self.parent.textModel.insertText("[[\(variable.variable)]]")
                 }
@@ -111,39 +90,14 @@ extension MappingTextEditor.Coordinator {
         let variablesButton = UIBarButtonItem(title: "Variables", image: UIImage(systemName: "chevron.left.slash.chevron.right"), menu: variablesMenu)
         variablesButton.style = .plain
         
-        let boldButton = UIBarButtonItem(primaryAction: boldAction)
-        let italicButton = UIBarButtonItem(primaryAction: italicAction)
-        let underlineButton = UIBarButtonItem(primaryAction: underlineAction)
-        
-        toolbar.setItems([boldButton, italicButton, underlineButton, variablesButton, flexibleSpace, doneButton], animated: true)
+        toolbar.setItems([variablesButton, flexibleSpace, doneButton], animated: true)
         
         return toolbar
-    }
-    
-    /// Add custom edit menu element.
-    func textView(_ textView: UITextView, editMenuForTextIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
-        var additionalActions: [UIMenuElement] = []
-        if range.length > 0 {
-            let boldAction = UIAction(title: "Bold", image: UIImage(systemName: "highlighter")) { action in
-                self.parent.textModel.toggleTrait(trait: .traitBold)
-            }
-            additionalActions.append(boldAction)
-        }
-        
-        let printAction = UIAction(title: "Print", image: UIImage(systemName: "heart")) { action in
-            self.printHTML(in: textView)
-        }
-        additionalActions.append(printAction)
-        
-        return UIMenu(children: additionalActions + suggestedActions)
     }
 }
 
 struct MappingTextEditor_Previews: PreviewProvider {
     @StateObject static var textModel = TextModel()
-//    @State static var text = NSAttributedString(string: "Just a test.", attributes: [.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)])
-//    @State static var range = NSRange()
-    
     
     static var previews: some View {
         MappingTextEditor(textModel: textModel, variables: MojiFieldVariables)

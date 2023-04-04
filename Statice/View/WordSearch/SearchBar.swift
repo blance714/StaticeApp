@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct SearchBar: View {
-    let animationNamespace: Namespace.ID
     let handleSubmit: (String) -> Void
-    let isBrowsingWebsite: Bool
+    let animationNamespace: Namespace.ID
     @State var text = ""
     
     var body: some View {
@@ -20,20 +19,19 @@ struct SearchBar: View {
                 .padding(.vertical, 8)
                 .padding(.horizontal, 18)
                 .background(Color(.secondarySystemBackground))
-                .matchedGeometryEffect(id: "Bar", in: animationNamespace)
         }
-        .matchedGeometryEffect(id: "Stack", in: animationNamespace)
     }
     
     var inputBox: some View {
         textField
-            .background(Color(.systemBackground))
+            .background(Color(.tertiarySystemBackground))
             .cornerRadius(10)
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.1) ,radius: 8)
+            .matchedGeometryEffect(id: "Bar", in: animationNamespace)
     }
     
     var textField: some View {
-        TextField(isBrowsingWebsite ? "Enter URL here" : "Enter text here", text: $text)
+        TextField("Enter text here", text: $text)
             .padding(.horizontal)
             .onSubmit {
                 handleSubmit(text)
@@ -46,6 +44,6 @@ struct SearchBar: View {
 
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar(animationNamespace: Namespace().wrappedValue, handleSubmit: { str in }, isBrowsingWebsite: false)
+        SearchBar(handleSubmit: { str in }, animationNamespace: Namespace().wrappedValue)
     }
 }

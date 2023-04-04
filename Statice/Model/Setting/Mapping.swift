@@ -10,7 +10,7 @@ import UIKit
 struct AnkiFieldVariable {
     let title: String
     let variable: String
-    let image: UIImage?
+    let systemImage: String?
 }
 
 let DictionaryFieldVariables: [Dictionary: [AnkiFieldVariable]] = [

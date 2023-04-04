@@ -65,9 +65,11 @@ func youdaoTranslateSentence(param: String, handler: @escaping (String) -> Void)
                     handler(entries[1])
                 } else {
                     var string = ""
-                    for result in translateResult {
-                        if let tgt = result[0]["tgt"] as? String {
-                            string = string + tgt;
+                    for results in translateResult {
+                        for result in results {
+                            if let tgt = result["tgt"] as? String {
+                                string = string + tgt;
+                            }
                         }
                     }
                     handler(string)

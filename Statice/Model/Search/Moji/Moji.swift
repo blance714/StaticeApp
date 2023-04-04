@@ -25,13 +25,13 @@ struct MojiSearchResult: SearchResult {
 }
 
 let MojiFieldVariables: [AnkiFieldVariable] = [
-    .init(title: "单词", variable: "spell", image: UIImage(systemName: "quote.bubble")),
-    .init(title: "读音", variable: "pron", image: UIImage(systemName: "speaker.wave.3")),
-    .init(title: "音调", variable: "accent", image: UIImage(systemName: "music.note")),
-    .init(title: "释义", variable: "define", image: UIImage(systemName: "character.book.closed")),
-    .init(title: "词性", variable: "pos", image: UIImage(systemName: "tag")),
-    .init(title: "例句", variable: "sentence", image: UIImage(systemName: "text.quote")),
-    .init(title: "例句翻译", variable: "translation", image: UIImage(systemName: "globe"))
+    .init(title: "单词", variable: "spell", systemImage: "quote.bubble"),
+    .init(title: "读音", variable: "pron", systemImage: "speaker.wave.3"),
+    .init(title: "音调", variable: "accent", systemImage: "music.note"),
+    .init(title: "释义", variable: "define", systemImage: "character.book.closed"),
+    .init(title: "词性", variable: "pos", systemImage: "tag"),
+    .init(title: "例句", variable: "sentence", systemImage: "text.quote"),
+    .init(title: "例句翻译", variable: "translation", systemImage: "globe")
 ]
 
 struct MojiFieldVariableMap {

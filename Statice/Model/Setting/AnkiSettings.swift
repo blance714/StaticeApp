@@ -1,49 +1,34 @@
 //
-//  AnkiModel.swift
+//  AnkiSettings.swift
 //  Statice
 //
-//  Created by blance on 2023/3/27.
+//  Created by blance on 2023/4/3.
 //
 
 import Foundation
+import SwiftUI
 
-class AnkiDataModel: ObservableObject {
-    @Published var ankiData: AnkiData? = nil
+class AnkiSettings: ObservableObject, Codable {
+    @Published var deck = ""
+    @Published var noteType = ""
+    @Published var allowAddingSameNote = false
+    var noteMapping: [String: String] = [:]
     
-    private let dataFileName = "ankiData"
-    
-    init() {
-        guard let codedData = try? Data(contentsOf: dataModelURL()) else {
-            print("No local Anki Data found.")
-            return
-        }
-        guard let decoded = try? JSONDecoder().decode(AnkiData.self, from: codedData) else {
-            print("Failed to decode Anki Data json file.")
-            return
-        }
-        ankiData = decoded
+    init() {}
+    init(deck: String, noteType: String, noteMapping: [String: String]) {
+        self.deck = deck
+        self.noteType = noteType
+        self.noteMapping = noteMapping
     }
     
-    init(ankiData: AnkiData) {
-        self.ankiData = ankiData
-    }
-    
-    private func dataModelURL() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory.appendingPathComponent(dataFileName, conformingTo: .json)
-    }
-    
-    func save() {
-        guard let coded = try? JSONEncoder().encode(ankiData) else {
-            print("Encode Anki data failed.")
-            return
-        }
-        
-        do {
-            try coded.write(to: dataModelURL())
-        } catch {
-            print("Failed to save Anki data: \(error)")
+    func getNoteMapping(dictionary: String, field: String) -> Binding<String> {
+        return Binding<String> {
+            print("Get Mapping:", "\(self.noteType)_\(dictionary)_\(field)", self.noteMapping["\(self.noteType)_\(dictionary)_\(field)"] ?? "")
+            return self.noteMapping["\(self.noteType)_\(dictionary)_\(field)"] ?? ""
+        } set: {
+            print("Set Mapping:", "\(self.noteType)_\(dictionary)_\(field)", $0)
+            //            self.objectWillChange.send()
+            self.noteMapping["\(self.noteType)_\(dictionary)_\(field)"] = $0
         }
     }
 }

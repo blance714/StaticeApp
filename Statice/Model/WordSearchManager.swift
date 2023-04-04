@@ -8,11 +8,15 @@
 import Foundation
 
 class WordSearchManager: ObservableObject {
+    @Published var isSearching = false
     @Published var searchResult: [any SearchResult] = []
     @Published var translationResult: TranslationResult? = nil
     
-    func handleSearch(searchText: String, sentenceSelection: SentenceSelection? = nil) {   //TODO: translate sentence
+    func handleSearch(searchText: String, sentenceSelection: SentenceSelection? = nil) {
         searchResult = []
+        if searchText == "" { return }
+        
+        isSearching = true
         var request = URLRequest(
             url: URL(string: "https://api.mojidict.com/parse/functions/search-all")!)
         let requestBody =
@@ -33,6 +37,9 @@ class WordSearchManager: ObservableObject {
             } else {
                 let string = String(data: data!, encoding: .utf8)
                 print(string)
+                DispatchQueue.main.async {
+                    self.isSearching = false
+                }
                 if let json = try? JSONDecoder().decode(SearchAllResponse.self, from: data!) {
                     DispatchQueue.main.async {
                         self.searchResult = json.result.result.word.searchResult.map { result in
@@ -43,6 +50,8 @@ class WordSearchManager: ObservableObject {
                             ) }
                         print(json)
                     }
+                } else {
+                    self.searchResult = []
                 }
             }
         }.resume()
