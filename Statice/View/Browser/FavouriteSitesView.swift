@@ -7,15 +7,19 @@
 
 import SwiftUI
 
+struct EditingSite: Identifiable {
+    let name: String
+    let url: URL?
+    var id: URL? { url }
+}
+
 struct FavouriteSitesView: View {
     @ObservedObject var urlManager: URLManager
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var favouriteSitesSettingModel: DataModel<FavouriteSitesSetting>
     @State private var editMode = EditMode.inactive
-    @State var isAddFavouriteSheetPresented = false
-    @State var editingName = ""
-    @State var editingURL: URL? = nil
+    @State var editingSite: EditingSite?
     @State var insertIndex = 0
     
     //    @State var sites = favouriteSitesTestData
@@ -30,10 +34,8 @@ struct FavouriteSitesView: View {
                         urlManager.handleURLRequest(urlText: site.url.absoluteString)
                         dismiss()
                     } else {
-                        editingName = site.name
-                        editingURL = site.url
                         insertIndex = sites.firstIndex(where: { $0 == site }) ?? sites.count
-                        isAddFavouriteSheetPresented = true
+                        editingSite = EditingSite(name: site.name, url: site.url)
                     }
                 } label: {
                     VStack(alignment: .leading) {
@@ -51,10 +53,8 @@ struct FavouriteSitesView: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        editingName = urlManager.title ?? ""
-                        editingURL = urlManager.url
                         insertIndex = sites.count
-                        isAddFavouriteSheetPresented = true
+                        editingSite = EditingSite(name: urlManager.title ?? "", url: urlManager.url)
                     } label: {
                         Label("Add favourites", systemImage: "plus")
                     }
@@ -62,10 +62,8 @@ struct FavouriteSitesView: View {
             }
             .navigationTitle("Favourites")
             .environment(\.editMode, $editMode)
-            .sheet(isPresented: $isAddFavouriteSheetPresented) {
-                
-            } content: {
-                AddFavouriteSitesView(editingName: editingName, editingURL: editingURL) { name, url in
+            .sheet(item: $editingSite) { site in
+                AddFavouriteSitesView(editingSite: site) { name, url in
                     favouriteSitesSettingModel.data.editFavourite(
                         FavouriteSite(name: name, url: url), at: insertIndex)
                 }
@@ -78,8 +76,7 @@ struct FavouriteSitesView: View {
 }
 
 struct AddFavouriteSitesView: View {
-    let editingName: String
-    let editingURL: URL?
+    let editingSite: EditingSite
     @State var nameString: String = ""
     @State var urlString: String = ""
     let saveHandler: ((String, URL) -> Void)
@@ -120,8 +117,8 @@ struct AddFavouriteSitesView: View {
                 Text("URL illegal.")
             }
             .onAppear {
-                nameString = editingName
-                urlString = editingURL?.absoluteString ?? ""
+                nameString = editingSite.name
+                urlString = editingSite.url?.absoluteString ?? ""
             }
         }
     }

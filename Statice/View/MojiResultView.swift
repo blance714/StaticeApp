@@ -15,7 +15,6 @@ struct MojiResultView: View {
 
     var body: some View {
         let title = searchResult.title
-        let id = searchResult.id
         Group {
             if let wordResult = wordResult {
                 MojiWordView(

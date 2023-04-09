@@ -12,28 +12,78 @@ struct URLBar: View {
     let handleSubmit: (String) -> Void
     let animationNamespace: Namespace.ID
     
+    @EnvironmentObject var favouriteSitesSettingModel: DataModel<FavouriteSitesSetting>
     @Namespace var selfNamespace
     @State var text = ""
     @FocusState var isFocused: Bool
     @State var isInputing = false
     @State var isFavouriteSitesSheetPresented = false
+    @State var pageFavouriteIndex: Int? = nil
+    @State var isMinimized = false
+    
+    private var sitesSetting: FavouriteSitesSetting {
+        favouriteSitesSettingModel.data
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             Divider()
-            inputBox
-                .padding(.vertical, 8)
-                .padding(.horizontal, 18)
-                .background(Color(.secondarySystemBackground))
+            Group {
+                if !isMinimized {
+                    inputBox
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 18)
+                    if !isInputing {
+                        toolbarItems
+                    }
+                }
+            }
+            .transition(.offset(y: 140))
         }
-        .onTapGesture {
-            print("233")
+        .background(Color(.secondarySystemBackground))
+        
+        .animation(.easeInOut, value: isMinimized)
+        .animation(.default, value: urlManager.isLoading)
+        
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if isMinimized {
+                minimizedView
+            }
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
+        .popover(isPresented: $isFavouriteSitesSheetPresented) {
+            FavouriteSitesView(urlManager: urlManager)
+        }
+        .onAppear {
+            text = urlManager.url.absoluteString
+            pageFavouriteIndex = sitesSetting.favouriteSites.firstIndex(where: { $0.url == urlManager.url })
+        }
+        .onChange(of: urlManager.url) { url in
+            text = url.absoluteString
+            pageFavouriteIndex = sitesSetting.favouriteSites.firstIndex(where: { $0.url == url })
+        }
+        .onChange(of: sitesSetting.favouriteSites) { _ in
+            pageFavouriteIndex = sitesSetting.favouriteSites.firstIndex(where: { $0.url == urlManager.url })
+            favouriteSitesSettingModel.save()
+        }
+    }
+    
+    var toolbarItems: some View {
+        HStack(spacing: 20) {
+            Group {
+                Button {
+                    if let index = pageFavouriteIndex {
+                        sitesSetting.favouriteSites.remove(at: index)
+                    } else {
+                        sitesSetting.favouriteSites.append(.init(name: urlManager.title ?? "", url: urlManager.url))
+                    }
+                } label: {
+                    Label("Add favourite",
+                          systemImage: pageFavouriteIndex == nil ? "bookmark" : "bookmark.fill")
+                    .symbolRenderingMode(.multicolor)
+                }
                 Button {
                     isFavouriteSitesSheetPresented = true
-                } label: { Label("Favourites", systemImage: "bookmark") }
+                } label: { Label("Favourites", systemImage: "book") }
                 Spacer()
                 Button {
                     urlManager.goBack?()
@@ -43,17 +93,32 @@ struct URLBar: View {
                     urlManager.goForward?()
                 } label: { Label("Go forward", systemImage: "chevron.forward") }
                     .disabled(!urlManager.canGoForward)
+                Button {
+                    withAnimation {
+                        isMinimized = true
+                    }
+                } label: { Label("Minimize", systemImage: "chevron.down.circle") }
+            }
+            .font(.title2)
+            .fontWeight(.regular)
+        }
+        .frame(height: 50)
+        .padding(.horizontal, 25)
+        .labelStyle(.iconOnly)
+    }
+    
+    var loadingProgress: some View {
+        Group {
+            if urlManager.isLoading {
+                GeometryReader { reader in
+                    Rectangle()
+                        .frame(width: urlManager.estimatedProgress * reader.size.width)
+                        .animation(.spring(), value: urlManager.estimatedProgress)
+                }
+                .frame(height: 2.5)
             }
         }
-        .popover(isPresented: $isFavouriteSitesSheetPresented) {
-            FavouriteSitesView(urlManager: urlManager)
-        }
-        .onAppear {
-            text = urlManager.url.absoluteString
-        }
-        .onChange(of: urlManager.url) {
-            text = $0.absoluteString
-        }
+        .transition(.opacity)
     }
     
     var inputBox: some View {
@@ -63,37 +128,35 @@ struct URLBar: View {
             } else {
                 urlPanel
             }
-            if (urlManager.isLoading) {
-                GeometryReader { reader in
-                    Rectangle()
-                        .frame(width: urlManager.estimatedProgress * reader.size.width)
-                        .animation(.spring(), value: urlManager.estimatedProgress)
-                }
-                .transition(.opacity)
-                .frame(height: 2.5)
-            }
+            loadingProgress
         }
-        .animation(.easeOut, value: urlManager.isLoading)
         .background(Color(.tertiarySystemBackground))
         .cornerRadius(10)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.1) ,radius: 8)
-        .matchedGeometryEffect(id: "Bar", in: animationNamespace)
-            
     }
     
+    @State var lastTime: Date?
     var urlPanel: some View {
         HStack (spacing: 0) {
-            urlPanelMenu
+            readerButton
             Button {
                 withAnimation {
                     isInputing = true
                 }
             } label: {
-                Text(urlManager.url.host ?? "NONE")
-                    .matchedGeometryEffect(id: "Text", in: selfNamespace, properties: .position, anchor: UnitPoint(x: 0, y: 0.5))
+                Text(urlManager.url.host ?? urlManager.url.absoluteString)
+//                    .matchedGeometryEffect(id: "Text", in: selfNamespace, properties: .position, anchor: .leading)
                     .frame(height: 42)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(Color(.label))
+                    .gesture(DragGesture().onChanged { value in
+                        if let lastTime = lastTime {
+                            print(sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2)) / (value.time.timeIntervalSince(lastTime)))
+                        }
+                        lastTime = value.time
+                    }.onEnded { value in
+                        lastTime = nil
+                    })
             }
             refreshButton
         }
@@ -101,13 +164,13 @@ struct URLBar: View {
         .frame(maxWidth: .infinity)
     }
     
-    var urlPanelMenu: some View {
-        Menu {
-            Button("233") {}
+    var readerButton: some View {
+        Button {
         } label: {
-            Label("Reload", systemImage: "textformat.size")
+            Label("Reader", systemImage: "rectangle.portrait.slash")
                 .labelStyle(.iconOnly)
         }
+        .disabled(true)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .aspectRatio(1.1, contentMode: .fit)
         .buttonStyle(.plain)
@@ -142,7 +205,7 @@ struct URLBar: View {
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
         
-            .matchedGeometryEffect(id: "Text", in: selfNamespace, properties: .position, anchor: .leading)
+//            .matchedGeometryEffect(id: "Text", in: selfNamespace, properties: .position, anchor: .leading)
             .padding(.horizontal)
             .padding(.vertical ,10)
 
@@ -162,6 +225,39 @@ struct URLBar: View {
                 isFocused = true
                 UITextField.appearance().clearButtonMode = .whileEditing
             }
+    }
+    
+    var minimizedView: some View {
+//        Text(urlManager.url.host ?? urlManager.url.absoluteString)
+//            .font(.caption)
+//            .offset(y: 10)
+//            .frame(maxWidth: .infinity)
+//            .contentShape(Rectangle())
+//            .border(.red)
+//            .onTapGesture {
+//                withAnimation {
+//                    print("tap")
+////                    isMinimized = false
+//                }
+//            }
+        GeometryReader { reader in
+            Text(urlManager.url.host ?? urlManager.url.absoluteString)
+                .font(.caption)
+                .offset(y: 10)
+                .frame(height: reader.safeAreaInsets.bottom, alignment: .top)
+                .frame(maxWidth: .infinity)
+                .contentShape(Rectangle())
+                .background(alignment: .top) {
+                    loadingProgress
+                }
+                .onTapGesture {
+                    withAnimation {
+                        isMinimized = false
+                    }
+                }
+        }
+        .frame(height: 15)
+
     }
 }
 

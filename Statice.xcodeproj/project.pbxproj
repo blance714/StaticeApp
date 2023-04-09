@@ -196,7 +196,6 @@
 				CEAFCB1129CFF0D900785432 /* WordSearch */,
 				CE0BD6A529D30EFD008B6CE5 /* Settings */,
 				CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */,
-				CEE3720A29D88A3F00D7E992 /* TranslationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -204,11 +203,11 @@
 		CEAFCB0A29CFEB3C00785432 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
-				CE0BDB8329DA56FF00D62068 /* URLBar.swift */,
-				CE21B2F529CD460200D61772 /* CustomWKWebView.swift */,
 				CEAFCB0829CFEA7500785432 /* BrowserView.swift */,
-				CED3542429DBB026008570D9 /* FavouriteSitesView.swift */,
 				CEA586CB29D82D880076FF74 /* WebView.swift */,
+				CE21B2F529CD460200D61772 /* CustomWKWebView.swift */,
+				CE0BDB8329DA56FF00D62068 /* URLBar.swift */,
+				CED3542429DBB026008570D9 /* FavouriteSitesView.swift */,
 			);
 			path = Browser;
 			sourceTree = "<group>";
@@ -219,6 +218,7 @@
 				CEAFCB1429D0677C00785432 /* SearchBar.swift */,
 				CEAFCB0D29CFEE7200785432 /* WordSearchView.swift */,
 				CEAFCB0F29CFEF5D00785432 /* WordResultView.swift */,
+				CEE3720A29D88A3F00D7E992 /* TranslationView.swift */,
 			);
 			path = WordSearch;
 			sourceTree = "<group>";
@@ -478,7 +478,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -512,7 +512,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

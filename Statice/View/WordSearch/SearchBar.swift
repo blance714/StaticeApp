@@ -27,7 +27,6 @@ struct SearchBar: View {
             .background(Color(.tertiarySystemBackground))
             .cornerRadius(10)
             .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.1) ,radius: 8)
-            .matchedGeometryEffect(id: "Bar", in: animationNamespace)
     }
     
     var textField: some View {

@@ -36,6 +36,7 @@ struct TranslationView: View {
                                         .fontWeight(.medium)
                                 }
                                 .foregroundColor(.blue)
+                                .layoutPriority(1)
                             } else {
                                 ProgressView()
                                     .frame(maxWidth: .infinity)

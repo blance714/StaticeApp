@@ -3,4 +3,100 @@
    uuid = "B3A9CB0C-9FED-4DCF-B05D-59B904E6D954"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Statice/View/Browser/URLBar.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - 24f5f55002ceb387"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 () -&gt; () in Statice.URLBar.body.getter : some"
+                  moduleName = "Statice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "708">
+               </Location>
+               <Location
+                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - 5a703fa9c31e757f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Statice.FavouriteSite) -&gt; Swift.Bool in closure #5 () -&gt; () in Statice.URLBar.body.getter : some"
+                  moduleName = "Statice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - 269532235dc5faae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; () in Statice.URLBar.body.getter : some"
+                  moduleName = "Statice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "700">
+               </Location>
+               <Location
+                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - f21c3e756693b256"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Statice.FavouriteSite) -&gt; Swift.Bool in closure #4 () -&gt; () in Statice.URLBar.body.getter : some"
+                  moduleName = "Statice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "192">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DC30B4ED-FE6A-4B48-80A4-61122100EF69"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Statice/View/Browser/BrowserView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "init(animationNamespace:urlManager:isSheetPresented:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
