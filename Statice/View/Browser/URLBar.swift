@@ -129,6 +129,7 @@ struct URLBar: View {
                 urlPanel
             }
             loadingProgress
+                .zIndex(1)
         }
         .background(Color(.tertiarySystemBackground))
         .cornerRadius(10)
@@ -145,7 +146,6 @@ struct URLBar: View {
                 }
             } label: {
                 Text(urlManager.url.host ?? urlManager.url.absoluteString)
-//                    .matchedGeometryEffect(id: "Text", in: selfNamespace, properties: .position, anchor: .leading)
                     .frame(height: 42)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(Color(.label))
@@ -166,14 +166,22 @@ struct URLBar: View {
     
     var readerButton: some View {
         Button {
+            withAnimation {
+                urlManager.isReaderModeEnabled.toggle()
+            }
         } label: {
-            Label("Reader", systemImage: "rectangle.portrait.slash")
+            Label("Reader",
+                  systemImage: urlManager.isReaderModeAvaliable
+                    ? "doc.plaintext"
+                    : "rectangle.portrait.slash")
                 .labelStyle(.iconOnly)
         }
-        .disabled(true)
+        .disabled(!urlManager.isReaderModeAvaliable)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .aspectRatio(1.1, contentMode: .fit)
         .buttonStyle(.plain)
+        .foregroundColor(urlManager.isReaderModeEnabled ? Color(.systemBackground): Color(.label))
+        .background(urlManager.isReaderModeEnabled ? Color(.label): Color.clear)
     }
     
     var refreshButton: some View {
@@ -228,18 +236,6 @@ struct URLBar: View {
     }
     
     var minimizedView: some View {
-//        Text(urlManager.url.host ?? urlManager.url.absoluteString)
-//            .font(.caption)
-//            .offset(y: 10)
-//            .frame(maxWidth: .infinity)
-//            .contentShape(Rectangle())
-//            .border(.red)
-//            .onTapGesture {
-//                withAnimation {
-//                    print("tap")
-////                    isMinimized = false
-//                }
-//            }
         GeometryReader { reader in
             Text(urlManager.url.host ?? urlManager.url.absoluteString)
                 .font(.caption)

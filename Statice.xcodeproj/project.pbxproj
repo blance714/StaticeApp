@@ -21,6 +21,7 @@
 		CE21B2F629CD460200D61772 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F529CD460200D61772 /* CustomWKWebView.swift */; };
 		CE21B2F929CD4BDA00D61772 /* Moji.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F829CD4BDA00D61772 /* Moji.swift */; };
 		CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2FA29CD563700D61772 /* MojiResultView.swift */; };
+		CE26195229E2D94500790716 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26195129E2D94500790716 /* Reader.swift */; };
 		CE7AC7D629D0C533007DDEB2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AC7D529D0C533007DDEB2 /* SettingsView.swift */; };
 		CE7AC7D829D0DAA0007DDEB2 /* AnkiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AC7D729D0DAA0007DDEB2 /* AnkiData.swift */; };
 		CE83A2CA29CC12FC00AA5D32 /* StaticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */; };
@@ -44,6 +45,7 @@
 		CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC687C229CC72C6000B306F /* Sugrec.swift */; };
 		CED3542529DBB026008570D9 /* FavouriteSitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3542429DBB026008570D9 /* FavouriteSitesView.swift */; };
 		CEE3720B29D88A3F00D7E992 /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3720A29D88A3F00D7E992 /* TranslationView.swift */; };
+		CEF1E5C829E44246005C6434 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF1E5C729E44246005C6434 /* String+Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,7 @@
 		CE21B2F529CD460200D61772 /* CustomWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		CE21B2F829CD4BDA00D61772 /* Moji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moji.swift; sourceTree = "<group>"; };
 		CE21B2FA29CD563700D61772 /* MojiResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojiResultView.swift; sourceTree = "<group>"; };
+		CE26195129E2D94500790716 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		CE7AC7D529D0C533007DDEB2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CE7AC7D729D0DAA0007DDEB2 /* AnkiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiData.swift; sourceTree = "<group>"; };
 		CE83A2C629CC12FC00AA5D32 /* Statice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Statice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +90,7 @@
 		CEC687C229CC72C6000B306F /* Sugrec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sugrec.swift; sourceTree = "<group>"; };
 		CED3542429DBB026008570D9 /* FavouriteSitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSitesView.swift; sourceTree = "<group>"; };
 		CEE3720A29D88A3F00D7E992 /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
+		CEF1E5C729E44246005C6434 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				CEAFCB0B29CFEB6000785432 /* URLManager.swift */,
+				CE26195129E2D94500790716 /* Reader.swift */,
+				CEF1E5C729E44246005C6434 /* String+Error.swift */,
 				CEAFCB1229CFF10500785432 /* WordSearchManager.swift */,
 				CEC66CEF29D729E400E9D3CC /* Setting */,
 				CE0BD6B229D49C05008B6CE5 /* Search */,
@@ -323,8 +329,10 @@
 				CEC66CF129D729F400E9D3CC /* Mapping.swift in Sources */,
 				CE0BD6A929D40144008B6CE5 /* NSAttributedString.swift in Sources */,
 				CE0BDB8429DA56FF00D62068 /* URLBar.swift in Sources */,
+				CE26195229E2D94500790716 /* Reader.swift in Sources */,
 				CEAFCB1029CFEF5D00785432 /* WordResultView.swift in Sources */,
 				CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */,
+				CEF1E5C829E44246005C6434 /* String+Error.swift in Sources */,
 				CE9511BC29D20EA50001A0F0 /* MappingTextEditor.swift in Sources */,
 				CE7AC7D629D0C533007DDEB2 /* SettingsView.swift in Sources */,
 				CEAFCB0929CFEA7500785432 /* BrowserView.swift in Sources */,
@@ -464,10 +472,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCD9J36525;
+				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -483,9 +493,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = blance.Statice;
+				MARKETING_VERSION = 0.0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_USE_INTEGRATED_DRIVER = NO;
 				SWIFT_VERSION = 5.0;
@@ -498,10 +509,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCD9J36525;
+				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -517,9 +530,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = blance.Statice;
+				MARKETING_VERSION = 0.0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_USE_INTEGRATED_DRIVER = NO;
 				SWIFT_VERSION = 5.0;

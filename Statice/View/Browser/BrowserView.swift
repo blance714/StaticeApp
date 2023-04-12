@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BrowserView: View {
     let animationNamespace: Namespace.ID
@@ -30,13 +31,19 @@ struct BrowserView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                WebView(urlManager: urlManager, handleSearch: { str, sentence in
-                    isSearchSheetPresented = true
-                    wordSearchManager.handleSearch(searchText: str, sentenceSelection: sentence)
-                }, handleTranslate: { sentence in
-                    isTranslationSheetPresented = true
-                    wordSearchManager.handleTranslate(sentence: sentence, bold: nil)
-                })
+                ZStack {
+                    WebView(urlManager: urlManager, handleSearch: { str, sentence in
+                        isSearchSheetPresented = true
+                        wordSearchManager.handleSearch(searchText: str, sentenceSelection: sentence)
+                    }, handleTranslate: { sentence in
+                        isTranslationSheetPresented = true
+                        wordSearchManager.handleTranslate(sentence: sentence, bold: nil)
+                    })
+                    if urlManager.isReaderModeEnabled {
+                        ReaderModeView(urlManager: urlManager)
+                    }
+                }
+                .animation(.easeInOut, value: urlManager.isReaderModeEnabled)
                 URLBar(urlManager: urlManager,
                        handleSubmit: urlManager.handleURLRequest,
                        animationNamespace: animationNamespace)
@@ -53,6 +60,35 @@ struct BrowserView: View {
                     .presentationDetents([.medium, .large])
             }
             .background(.background)
+        }
+    }
+}
+
+struct ReaderModeView: View {
+    @ObservedObject var urlManager: URLManager
+    
+    @State var readerData: ReaderData?
+    
+    var body: some View {
+        ScrollView {
+            if let readerData = readerData {
+                Text(readerData.article)
+            } else {
+                ProgressView()
+                    .onAppear {
+                        fetchData()
+                    }
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.background)
+    }
+    
+    func fetchData() {
+        if let convert = urlManager.convertReaderModeData {
+            convert().sink { data in
+                readerData = data
+            }
         }
     }
 }

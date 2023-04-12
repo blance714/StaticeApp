@@ -3,6 +3,11 @@
 A iOS application for adding new words to Anki while reading novels.  
 一个用来在床上躺着看小说时还能顺便添加点生词进Anki的iOS软件。
 
+## Usage
+
+可以在这里参加 [Testflight](https://testflight.apple.com/join/rOd5PlDt)  
+或者，前往 [Release](https://github.com/Chen03/StaticeApp/releases) 下载ipa，并用 altstore 之类的安装。  
+
 ## Status
 
 - 功能

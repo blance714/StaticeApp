@@ -7,6 +7,7 @@
 
 import Foundation
 import WebKit
+import Combine
 
 class URLManager: ObservableObject {
     @Published var url: URL
@@ -22,13 +23,27 @@ class URLManager: ObservableObject {
     var reload: (() -> Void)?
     var stopLoading: (() -> Void)?
     
+    var callAsyncJavaScript: ((
+        String, [String : Any], WKFrameInfo?, WKContentWorld, ((Result<Any, Error>) -> Void)?
+    ) -> Void)?
+    
+    @Published var isReaderModeEnabled: Bool = false
+    @Published var isReaderModeAvaliable: Bool = false
+    var convertReaderModeData: (() -> AnyPublisher<ReaderData, Never>)?
+    
+    var didFinishPublisher = PassthroughSubject<Void, Never>()
+    var didFinishCancellable: AnyCancellable? = nil
+    
     init(url: URL = URL(string: "about:blank")!) {
         self.url = url
+        
+//        didFinishCancellable = didFinishPublisher.sink {
+//            self.checkIfReaderModeAvaliable()
+//        }
     }
     
     func handleURLRequest(urlText: String) {
-        var url = URL(string: urlText)
-        if var url = url {
+        if var url = URL(string: urlText) {
             if url.scheme == nil {
                 url = URL(string: "https://\(url.absoluteString)")!
             }
@@ -38,11 +53,15 @@ class URLManager: ObservableObject {
         }
     }
     
-    func setupWebView(_ webView: WKWebView) {
+    var cancellable: AnyCancellable?
+    func setupWebView(_ webView: WKWebView, _ coordinator: WebView.Coordinator) {
         goBack = { webView.goBack() }
         goForward = { webView.goForward() }
         reload = { webView.reload() }
         stopLoading = { webView.stopLoading() }
+        callAsyncJavaScript = webView.callAsyncJavaScript(_:arguments:in:in:completionHandler:)
+        
+        cancellable = coordinator.didFinishPublisher.subscribe(didFinishPublisher)
         
         setupObservation(webView)
     }
@@ -56,7 +75,7 @@ class URLManager: ObservableObject {
     func setupObservation(_ webView: WKWebView) {
         urlObserver = webView.observe(\.url, options: .new) { webView, change in
             if let url = change.newValue! {
-                print("URL: \(String(describing: url))")
+                print("URL: \(String(describing: url)), isLoading: \(webView.isLoading)")
                 DispatchQueue.main.async {
                     self.url = url
                 }
@@ -80,6 +99,33 @@ class URLManager: ObservableObject {
         }
         canGoForwardObserver = webView.observe(\.canGoForward, options: .new) { _, change in
             self.canGoForward = change.newValue!
+        }
+    }
+    
+    func callScript(_ script: String, arguments: [String : Any] = [:], handler: ((Result<Any, Error>) -> Void)?) {
+        guard let call = callAsyncJavaScript else {
+            return
+        }
+        
+        call(script, arguments, nil, .page, handler);
+    }
+    
+    func checkIfReaderModeAvaliable() {
+        ReaderModeList.forEach { readerMode in
+            if url.absoluteString.contains(readerMode.pattern) {
+                self.isReaderModeAvaliable = true
+                convertReaderModeData = {
+                    readerMode.convert(self)
+                        .catch { error in
+                            self.isReaderModeAvaliable = false
+                            self.isReaderModeEnabled = false
+                            self.convertReaderModeData = nil
+                            return Just(ReaderData(article: "Cannot fetch novel content."))
+                        }
+                        .assertNoFailure()
+                        .eraseToAnyPublisher()
+                }
+            }
         }
     }
 }

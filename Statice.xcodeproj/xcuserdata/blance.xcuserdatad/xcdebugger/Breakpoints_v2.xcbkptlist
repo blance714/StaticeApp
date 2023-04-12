@@ -7,77 +7,62 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83"
-            shouldBeEnabled = "Yes"
+            uuid = "D6951585-2F46-4A99-B763-92BD32FBBA23"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Statice/View/Browser/URLBar.swift"
+            filePath = "Statice/Model/Reader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - 24f5f55002ceb387"
+                  uuid = "D6951585-2F46-4A99-B763-92BD32FBBA23 - 4a685099f7c94244"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in Statice.URLBar.body.getter : some"
+                  symbolName = "closure #1 (Swift.Result&lt;Any, Swift.Error&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Statice.ReaderData, Swift.Error&gt;) -&gt; ()) -&gt; () in closure #1 (Statice.URLManager) -&gt; Combine.AnyPublisher&lt;Statice.ReaderData, Swift.Error&gt; in variable initialization expression of Statice.ReaderModeList : Swift.Array&lt;Statice.ReaderMode&gt;"
                   moduleName = "Statice"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Reader.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "708">
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "80">
                </Location>
                <Location
-                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - 5a703fa9c31e757f"
+                  uuid = "D6951585-2F46-4A99-B763-92BD32FBBA23 - 4a685099f7c94244"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Statice.FavouriteSite) -&gt; Swift.Bool in closure #5 () -&gt; () in Statice.URLBar.body.getter : some"
+                  symbolName = "closure #1 (Swift.Result&lt;Any, Swift.Error&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Statice.ReaderData, Swift.Error&gt;) -&gt; ()) -&gt; () in closure #1 (Statice.URLManager) -&gt; Combine.AnyPublisher&lt;Statice.ReaderData, Swift.Error&gt; in variable initialization expression of Statice.ReaderModeList : Swift.Array&lt;Statice.ReaderMode&gt;"
                   moduleName = "Statice"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Reader.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "192">
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "88">
                </Location>
                <Location
-                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - 269532235dc5faae"
+                  uuid = "D6951585-2F46-4A99-B763-92BD32FBBA23 - 4a685099f7c94244"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in Statice.URLBar.body.getter : some"
+                  symbolName = "closure #1 (Swift.Result&lt;Any, Swift.Error&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Statice.ReaderData, Swift.Error&gt;) -&gt; ()) -&gt; () in closure #1 (Statice.URLManager) -&gt; Combine.AnyPublisher&lt;Statice.ReaderData, Swift.Error&gt; in variable initialization expression of Statice.ReaderModeList : Swift.Array&lt;Statice.ReaderMode&gt;"
                   moduleName = "Statice"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Reader.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "700">
-               </Location>
-               <Location
-                  uuid = "EA071973-2D3C-469D-9016-425C8FBB4C83 - f21c3e756693b256"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Statice.FavouriteSite) -&gt; Swift.Bool in closure #4 () -&gt; () in Statice.URLBar.body.getter : some"
-                  moduleName = "Statice"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "192">
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "108">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -85,17 +70,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DC30B4ED-FE6A-4B48-80A4-61122100EF69"
-            shouldBeEnabled = "No"
+            uuid = "7B558DA7-9CFA-41CF-B58C-5DC783BB71F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Statice/Model/URLManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "checkIfReaderModeAvaliable()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE9BC7C4-F478-4FF9-A992-077A9A9C638F"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Statice/View/Browser/BrowserView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "init(animationNamespace:urlManager:isSheetPresented:)"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "fetchData()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D0895E0-1F7E-40AA-9EB1-9B6EA984506E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Statice/View/Browser/URLBar.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "1D0895E0-1F7E-40AA-9EB1-9B6EA984506E - 5346eec6fd5848a5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #6 (Swift.Array&lt;Statice.FavouriteSite&gt;) -&gt; () in Statice.URLBar.body.getter : some"
+                  moduleName = "Statice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "292">
+               </Location>
+               <Location
+                  uuid = "1D0895E0-1F7E-40AA-9EB1-9B6EA984506E - 2efda40bcdf78b1e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Statice.FavouriteSite) -&gt; Swift.Bool in closure #6 (Swift.Array&lt;Statice.FavouriteSite&gt;) -&gt; () in Statice.URLBar.body.getter : some"
+                  moduleName = "Statice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/View/Browser/URLBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "260">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

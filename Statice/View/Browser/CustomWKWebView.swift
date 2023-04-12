@@ -19,10 +19,6 @@ class CustomWKWebView: WKWebView {
         self.handleSearch = handleSearch
         self.handleTranslate = handleTranslate
         
-//        urlObservation = observe(\.backForwardList, options: [.old, .new]) {
-//
-//        }
-        
         let configuration = WKWebViewConfiguration()
         super.init(frame: .zero, configuration: configuration)
         

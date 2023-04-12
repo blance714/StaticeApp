@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import WebKit
+import Combine
 
 struct WebView: UIViewRepresentable {
     @ObservedObject var urlManager: URLManager
@@ -22,8 +23,9 @@ struct WebView: UIViewRepresentable {
         let webView = CustomWKWebView(handleSearch: handleSearch, handleTranslate: handleTranslate)
         webView.allowsBackForwardNavigationGestures = true
         
+        webView.navigationDelegate = context.coordinator
         
-        urlManager.setupWebView(webView)
+        urlManager.setupWebView(webView, context.coordinator)
         
         return webView
     }
@@ -34,7 +36,7 @@ struct WebView: UIViewRepresentable {
         }
     }
 
-    class Coordinator: NSObject {
+    class Coordinator: NSObject, WKNavigationDelegate {
         var parent: WebView
         @ObservedObject var urlManager: URLManager
         
@@ -45,6 +47,11 @@ struct WebView: UIViewRepresentable {
         
         func setupObservation(_ webView: WKWebView) {
             urlManager.setupObservation(webView)
+        }
+        
+        var didFinishPublisher = PassthroughSubject<Void, Never>()
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            didFinishPublisher.send()
         }
     }
 }
