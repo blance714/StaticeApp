@@ -18,6 +18,7 @@
 		CE0BDB8629DAB15700D62068 /* AnkiSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BDB8529DAB15700D62068 /* AnkiSettings.swift */; };
 		CE0BDB8829DAB1D200D62068 /* FavouriteSites.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BDB8729DAB1D200D62068 /* FavouriteSites.swift */; };
 		CE0BDB8A29DAB52B00D62068 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BDB8929DAB52B00D62068 /* DataModel.swift */; };
+		CE21662D29EC57B700E28FDA /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21662C29EC57B700E28FDA /* Selection.swift */; };
 		CE21B2F629CD460200D61772 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F529CD460200D61772 /* CustomWKWebView.swift */; };
 		CE21B2F929CD4BDA00D61772 /* Moji.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F829CD4BDA00D61772 /* Moji.swift */; };
 		CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2FA29CD563700D61772 /* MojiResultView.swift */; };
@@ -61,6 +62,7 @@
 		CE0BDB8529DAB15700D62068 /* AnkiSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiSettings.swift; sourceTree = "<group>"; };
 		CE0BDB8729DAB1D200D62068 /* FavouriteSites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSites.swift; sourceTree = "<group>"; };
 		CE0BDB8929DAB52B00D62068 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		CE21662C29EC57B700E28FDA /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		CE21B2F529CD460200D61772 /* CustomWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		CE21B2F829CD4BDA00D61772 /* Moji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moji.swift; sourceTree = "<group>"; };
 		CE21B2FA29CD563700D61772 /* MojiResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojiResultView.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				CE0BD6A329D2E3BD008B6CE5 /* TextModel.swift */,
 				CE0BD6A829D40144008B6CE5 /* NSAttributedString.swift */,
 				CEA586C729D8100F0076FF74 /* Published+Codable.swift */,
+				CE21662C29EC57B700E28FDA /* Selection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				CE0BDB8829DAB1D200D62068 /* FavouriteSites.swift in Sources */,
 				CEC66CF529D740DB00E9D3CC /* AddNoteView.swift in Sources */,
 				CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */,
+				CE21662D29EC57B700E28FDA /* Selection.swift in Sources */,
 				CEAFCB0E29CFEE7200785432 /* WordSearchView.swift in Sources */,
 				CEAFCB1329CFF10500785432 /* WordSearchManager.swift in Sources */,
 				CEC66CF129D729F400E9D3CC /* Mapping.swift in Sources */,
@@ -477,7 +481,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = 6PVAPR495F;
+				DEVELOPMENT_TEAM = ZCD9J36525;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -494,7 +498,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
+				PRODUCT_BUNDLE_IDENTIFIER = blance.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -514,7 +518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = 6PVAPR495F;
+				DEVELOPMENT_TEAM = ZCD9J36525;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -531,7 +535,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
+				PRODUCT_BUNDLE_IDENTIFIER = blance.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

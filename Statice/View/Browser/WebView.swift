@@ -12,8 +12,8 @@ import Combine
 
 struct WebView: UIViewRepresentable {
     @ObservedObject var urlManager: URLManager
-    let handleSearch: ((String, SentenceSelection) -> Void)?
-    let handleTranslate: ((String) -> Void)?
+    let handleSearch: ((SearchSelection) -> Void)?
+    let handleTranslate: ((TranslateSelection) -> Void)?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self, urlManager: _urlManager)

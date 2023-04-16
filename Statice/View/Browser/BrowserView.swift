@@ -15,6 +15,7 @@ struct BrowserView: View {
     @StateObject var wordSearchManager: WordSearchManager
     @State var isSearchSheetPresented = false
     @State var isTranslationSheetPresented = false
+    @State var selectionRect: CGRect = .zero
     
     init(animationNamespace: Namespace.ID = Namespace().wrappedValue, urlManager: URLManager = URLManager(), isSheetPresented: Bool = false) {
         self.animationNamespace = animationNamespace
@@ -32,12 +33,14 @@ struct BrowserView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 ZStack {
-                    WebView(urlManager: urlManager, handleSearch: { str, sentence in
+                    WebView(urlManager: urlManager, handleSearch: { selection in
                         isSearchSheetPresented = true
-                        wordSearchManager.handleSearch(searchText: str, sentenceSelection: sentence)
-                    }, handleTranslate: { sentence in
+                        selectionRect = selection.rect
+                        wordSearchManager.handleSearch(searchText: selection.selection, sentenceSelection: selection.sentence)
+                    }, handleTranslate: { selection in
                         isTranslationSheetPresented = true
-                        wordSearchManager.handleTranslate(sentence: sentence, bold: nil)
+                        selectionRect = selection.rect
+                        wordSearchManager.handleTranslate(sentence: selection.selection, bold: nil)
                     })
                     if urlManager.isReaderModeEnabled {
                         ReaderModeView(urlManager: urlManager)
@@ -48,15 +51,18 @@ struct BrowserView: View {
                        handleSubmit: urlManager.handleURLRequest,
                        animationNamespace: animationNamespace)
             }
-            .popover(isPresented: $isSearchSheetPresented, attachmentAnchor: .point(.center)) {
+            .popover(isPresented: $isSearchSheetPresented,
+                     attachmentAnchor: .rect(.rect(selectionRect))) {
                 NavigationStack {
                     WordResultView(wordSearchManager: wordSearchManager)
                         .navigationBarTitleDisplayMode(.inline)
                 }
                 .frame(idealWidth: 400, idealHeight: 650)
+                .presentationDetents([.medium, .large])
             }
-            .popover(isPresented: $isTranslationSheetPresented, attachmentAnchor: .point(.center)) {
+                .popover(isPresented: $isTranslationSheetPresented, attachmentAnchor: .rect(.rect(selectionRect))) {
                 TranslationView(translationResult: wordSearchManager.translationResult)
+                    .frame(idealWidth: 400, maxHeight: 650)
                     .presentationDetents([.medium, .large])
             }
             .background(.background)

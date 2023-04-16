@@ -50,9 +50,6 @@ struct URLBar: View {
                 minimizedView
             }
         }
-        .popover(isPresented: $isFavouriteSitesSheetPresented) {
-            FavouriteSitesView(urlManager: urlManager)
-        }
         .onAppear {
             text = urlManager.url.absoluteString
             pageFavouriteIndex = sitesSetting.favouriteSites.firstIndex(where: { $0.url == urlManager.url })
@@ -84,6 +81,11 @@ struct URLBar: View {
                 Button {
                     isFavouriteSitesSheetPresented = true
                 } label: { Label("Favourites", systemImage: "book") }
+                    .popover(isPresented: $isFavouriteSitesSheetPresented) {
+                        FavouriteSitesView(urlManager: urlManager)
+                            .frame(idealWidth: 400, idealHeight: 650)
+                            .presentationDetents([.medium, .large])
+                    }
                 Spacer()
                 Button {
                     urlManager.goBack?()

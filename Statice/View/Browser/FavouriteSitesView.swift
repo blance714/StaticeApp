@@ -72,6 +72,7 @@ struct FavouriteSitesView: View {
                 favouriteSitesSettingModel.save()
             }
         }
+        .font(.body)
     }
 }
 

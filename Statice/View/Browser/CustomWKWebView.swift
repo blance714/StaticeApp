@@ -11,11 +11,11 @@ import SwiftUI
 import Combine
 
 class CustomWKWebView: WKWebView {
-    var handleSearch: ((String, SentenceSelection) -> Void)?
-    var handleTranslate: ((String) -> Void)?
+    var handleSearch: ((SearchSelection) -> Void)?
+    var handleTranslate: ((TranslateSelection) -> Void)?
     var urlObservation: NSKeyValueObservation?
     
-    init(handleSearch: ((String, SentenceSelection) -> Void)?, handleTranslate: ((String) -> Void)?) {
+    init(handleSearch: ((SearchSelection) -> Void)?, handleTranslate: ((TranslateSelection) -> Void)?) {
         self.handleSearch = handleSearch
         self.handleTranslate = handleTranslate
         
@@ -63,9 +63,18 @@ extension CustomWKWebView {
     
     @objc func translateAction(_ sender: Any?) {
         print("Translate Action")
-        evaluateJavaScript("window.getSelection().toString()") { (result, error) in
-            if let text = result as? String {
-                self.handleTranslate?(text)
+        evaluateJavaScript(getTranslateSelectionJS) { (result, error) in
+            if let dict = (result as? NSDictionary),
+               let selection = dict["selection"] as? String,
+               let left = dict["left"] as? CGFloat,
+               let top = dict["top"] as? CGFloat,
+               let width = dict["width"] as? CGFloat,
+               let height = dict["height"] as? CGFloat
+            {
+                self.handleTranslate?(.init(
+                    selection: selection,
+                    rect: .init(x: left, y: top, width: width, height: height)
+                ))
             } else if let error = error {
                 print("获取选中文本时出错：\(error)")
             }
@@ -75,13 +84,21 @@ extension CustomWKWebView {
     @objc func searchWordAction(_ sender: Any?) {
         // 在这里执行你的自定义操作
         print("Search Action")
-        evaluateJavaScript(getSelectionJS) {(result, error) in
-            if let data = (result as? String)?.data(using: .utf8),
-               let selection = try? JSONDecoder().decode(GetSelectionReturnValue.self, from: data)
+        evaluateJavaScript(getSearchSelectionJS) {(result, error) in
+            if let dict = (result as? NSDictionary),
+               let sentence = dict["sentence"] as? String,
+               let bold = dict["bold"] as? String,
+               let selection = dict["selection"] as? String,
+               let left = dict["left"] as? CGFloat,
+               let top = dict["top"] as? CGFloat,
+               let width = dict["width"] as? CGFloat,
+               let height = dict["height"] as? CGFloat
             {
-                self.handleSearch?(
-                    selection.selection,
-                    SentenceSelection(sentence: selection.sentence, bold: selection.bold))
+                self.handleSearch?(.init(
+                    selection: selection,
+                    sentence: .init(sentence: sentence, bold: bold),
+                    rect: .init(x: left, y: top, width: width, height: height)
+                ))
             } else {
                 print("Failed to get selection: \(error)")
             }
@@ -96,18 +113,7 @@ extension CustomWKWebView {
     }
 }
 
-struct GetSelectionReturnValue: Codable {
-    let sentence: String
-    let bold: String
-    let selection: String
-}
-
-struct SentenceSelection: Codable {
-    let sentence: String
-    let bold: String
-}
-
-let getSelectionJS = """
+let getSearchSelectionJS = """
 (() => {
   const INLINE_TAGS = new Set([
     // Inline text semantics
@@ -180,14 +186,34 @@ let getSelectionJS = """
       sentenceTail = (tailingText.match(sentenceTailTester) || [''])[0]
   }
 
-  return JSON.stringify({
+  const rect = range.getBoundingClientRect();
+
+  return {
     sentence: (sentenceHead + selectedText + sentenceTail)
       .replace(/(^\\s+)|(\\s+$)/gm,'\\n')
       .replace(/(^\\s+)|(\\s+$)/g, ''),
     bold: (sentenceHead + '<b>' + selectedText + '</b>' + sentenceTail)
     .replace(/(^\\s+)|(\\s+$)/gm,'\\n')
     .replace(/(^\\s+)|(\\s+$)/g, ''),
-    selection: selection.toString()
-  })
+    selection: selection.toString(),
+    left: rect.left,
+    top: rect.top,
+    width: rect.width,
+    height: rect.height
+  }
+})()
+"""
+
+let getTranslateSelectionJS = """
+(() => {
+  const range = window.getSelection().getRangeAt(0);
+  const rect = range.getBoundingClientRect();
+  return {
+    selection: range.toString(),
+    left: rect.left,
+    top: rect.top,
+    width: rect.width,
+    height: rect.height
+  }
 })()
 """

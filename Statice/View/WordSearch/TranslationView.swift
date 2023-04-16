@@ -11,7 +11,7 @@ struct TranslationView: View {
     let translationResult: TranslationResult?
     
     var body: some View {
-        NavigationStack {
+        ScrollView {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
                     if let result = translationResult {
@@ -36,6 +36,7 @@ struct TranslationView: View {
                                         .fontWeight(.medium)
                                 }
                                 .foregroundColor(.blue)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .layoutPriority(1)
                             } else {
                                 ProgressView()
@@ -57,9 +58,15 @@ struct TranslationView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(Color(.secondarySystemBackground))
             .navigationTitle("Translation")
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .background(Color(.secondarySystemBackground))
+        .onAppear {
+            UIScrollView.appearance().alwaysBounceVertical = false
+        }
+        .onDisappear {
+            UIScrollView.appearance().alwaysBounceVertical = true
         }
     }
 }
