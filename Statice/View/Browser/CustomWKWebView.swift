@@ -208,12 +208,13 @@ let getTranslateSelectionJS = """
 (() => {
   const range = window.getSelection().getRangeAt(0);
   const rect = range.getBoundingClientRect();
+  const scale = window.visualViewport.scale;
   return {
     selection: range.toString(),
-    left: rect.left,
-    top: rect.top,
-    width: rect.width,
-    height: rect.height
+    left: rect.left * scale,
+    top: rect.top * scale,
+    width: rect.width * scale,
+    height: rect.height * scale
   }
 })()
 """
