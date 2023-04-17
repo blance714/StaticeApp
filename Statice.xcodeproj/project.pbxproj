@@ -481,7 +481,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCD9J36525;
+				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -498,7 +498,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.4;
-				PRODUCT_BUNDLE_IDENTIFIER = blance.statice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -518,7 +518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCD9J36525;
+				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -535,7 +535,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.4;
-				PRODUCT_BUNDLE_IDENTIFIER = blance.statice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

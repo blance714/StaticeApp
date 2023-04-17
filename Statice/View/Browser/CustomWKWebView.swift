@@ -187,6 +187,7 @@ let getSearchSelectionJS = """
   }
 
   const rect = range.getBoundingClientRect();
+  const scale = window.visualViewport.scale;
 
   return {
     sentence: (sentenceHead + selectedText + sentenceTail)
@@ -196,10 +197,10 @@ let getSearchSelectionJS = """
     .replace(/(^\\s+)|(\\s+$)/gm,'\\n')
     .replace(/(^\\s+)|(\\s+$)/g, ''),
     selection: selection.toString(),
-    left: rect.left,
-    top: rect.top,
-    width: rect.width,
-    height: rect.height
+    left: rect.left * scale,
+    top: rect.top * scale,
+    width: rect.width * scale,
+    height: rect.height * scale
   }
 })()
 """
