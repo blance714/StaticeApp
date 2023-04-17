@@ -77,8 +77,8 @@
             filePath = "Statice/Model/URLManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "checkIfReaderModeAvaliable()"
             landmarkType = "7">
          </BreakpointContent>

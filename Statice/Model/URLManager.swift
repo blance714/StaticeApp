@@ -34,7 +34,7 @@ class URLManager: ObservableObject {
     var didFinishPublisher = PassthroughSubject<Void, Never>()
     var didFinishCancellable: AnyCancellable? = nil
     
-    init(url: URL = URL(string: "about:blank")!) {
+    init(url: URL = Bundle.main.url(forResource: "intro", withExtension: "html") ?? URL(string: "about:blank")!) {
         self.url = url
         
 //        didFinishCancellable = didFinishPublisher.sink {
@@ -50,6 +50,12 @@ class URLManager: ObservableObject {
             self.url = url
         } else {
             self.url =  URL(string: "about:blank")!
+        }
+    }
+    
+    func handleURLRequest(url: URL?) {
+        if let url = url {
+            self.url = url
         }
     }
     

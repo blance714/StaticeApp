@@ -13,6 +13,10 @@ struct TranslationView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
+                Text("Translation")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, 10)
                 VStack(alignment: .leading) {
                     if let result = translationResult {
                         VStack(alignment: .leading, spacing: 5) {
@@ -58,8 +62,6 @@ struct TranslationView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .navigationTitle("Translation")
-            .navigationBarTitleDisplayMode(.inline)
         }
         .background(Color(.secondarySystemBackground))
         .onAppear {

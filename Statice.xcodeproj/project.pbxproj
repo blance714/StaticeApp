@@ -44,6 +44,7 @@
 		CEC66CF529D740DB00E9D3CC /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */; };
 		CEC66CF829D7415900E9D3CC /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC66CF729D7415900E9D3CC /* TestData.swift */; };
 		CEC687C329CC72C6000B306F /* Sugrec.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC687C229CC72C6000B306F /* Sugrec.swift */; };
+		CECE57B129ED2A4400CD1C71 /* intro.html in Resources */ = {isa = PBXBuildFile; fileRef = CECE57AE29ED20F500CD1C71 /* intro.html */; };
 		CED3542529DBB026008570D9 /* FavouriteSitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3542429DBB026008570D9 /* FavouriteSitesView.swift */; };
 		CEE3720B29D88A3F00D7E992 /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3720A29D88A3F00D7E992 /* TranslationView.swift */; };
 		CEF1E5C829E44246005C6434 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF1E5C729E44246005C6434 /* String+Error.swift */; };
@@ -90,6 +91,7 @@
 		CEC66CF429D740DB00E9D3CC /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		CEC66CF729D7415900E9D3CC /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = SOURCE_ROOT; };
 		CEC687C229CC72C6000B306F /* Sugrec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sugrec.swift; sourceTree = "<group>"; };
+		CECE57AE29ED20F500CD1C71 /* intro.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = intro.html; sourceTree = "<group>"; };
 		CED3542429DBB026008570D9 /* FavouriteSitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSitesView.swift; sourceTree = "<group>"; };
 		CEE3720A29D88A3F00D7E992 /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
 		CEF1E5C729E44246005C6434 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		CE83A2C829CC12FC00AA5D32 /* Statice */ = {
 			isa = PBXGroup;
 			children = (
+				CECE57AF29ED210900CD1C71 /* Resource */,
 				CEC66CF729D7415900E9D3CC /* TestData.swift */,
 				CEAFCB0629CF4CC900785432 /* Info.plist */,
 				CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */,
@@ -243,6 +246,14 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		CECE57AF29ED210900CD1C71 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				CECE57AE29ED20F500CD1C71 /* intro.html */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECE57B129ED2A4400CD1C71 /* intro.html in Resources */,
 				CE83A2D129CC12FD00AA5D32 /* Preview Assets.xcassets in Resources */,
 				CE83A2CE29CC12FD00AA5D32 /* Assets.xcassets in Resources */,
 			);
@@ -479,7 +491,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
 				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
@@ -516,7 +528,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
 				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
