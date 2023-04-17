@@ -66,9 +66,8 @@ struct MojiResultView: View {
                 do {
                     let json = try JSONDecoder().decode(MojiFetchWordsResponse.self, from: data!)
                     wordResult = json.result.result[0]
-                    print(json)
                 } catch let error {
-                    print(error)
+                    print("Moji data decode error: \(error)")
                 }
             }
         }.resume()

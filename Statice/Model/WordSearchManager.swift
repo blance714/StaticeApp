@@ -20,8 +20,9 @@ class WordSearchManager: ObservableObject {
         var request = URLRequest(
             url: URL(string: "https://api.mojidict.com/parse/functions/search-all")!)
         let requestBody =
-        SearchAllRequest(text: searchText, types: [102], _ApplicationId: MojiApplicationId)
+        SearchAllRequest(text: searchText, types: [102, 103, 106, 431], _ApplicationId: MojiApplicationId)
         let jsonData = try? JSONEncoder().encode(requestBody)
+        print("handleSearch requestBody \(requestBody)")
         
         request.httpMethod = "POST"
         request.setValue("text/plain", forHTTPHeaderField: "Content-Type")

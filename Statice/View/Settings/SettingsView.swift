@@ -98,7 +98,7 @@ struct ConnectWithAnkiButton: View {
             }
         }
         .onOpenURL { url in
-            print(url)
+            print("onOpenURL: \(url)")
             if (url.absoluteString == "statice://ankiCallback") {
                 isReceivingAnkiData = true
             }
@@ -113,7 +113,7 @@ struct ConnectWithAnkiButton: View {
     func parseAnkiData(data: Data) {
         do {
             let yetData = try JSONDecoder().decode(AnkiData.self, from: data)
-            print(ankiData)
+            print("parseAnkiData\(ankiData)")
             DispatchQueue.main.async {
                 withAnimation() {
                     ankiData = yetData

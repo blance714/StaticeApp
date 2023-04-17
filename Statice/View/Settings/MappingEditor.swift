@@ -14,7 +14,6 @@ struct MappingEditor: View {
     let variables: [AnkiFieldVariable]
     
     init(value: Binding<String>, variables: [AnkiFieldVariable]) {
-        print("MappingEditor")
         _value = value
         _textModel = StateObject(wrappedValue: TextModel(string: value.wrappedValue))
         self.variables = variables

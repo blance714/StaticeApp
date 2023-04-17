@@ -53,8 +53,6 @@ extension CustomWKWebView {
     }
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        print(action)
-        print(sender)
         if action == #selector(copy(_:)) || action == #selector(searchWordAction(_:)) || action == #selector(translateAction(_:)) {
             return true
         }
@@ -62,7 +60,6 @@ extension CustomWKWebView {
     }
     
     @objc func translateAction(_ sender: Any?) {
-        print("Translate Action")
         evaluateJavaScript(getTranslateSelectionJS) { (result, error) in
             if let dict = (result as? NSDictionary),
                let selection = dict["selection"] as? String,
@@ -82,8 +79,6 @@ extension CustomWKWebView {
     }
     
     @objc func searchWordAction(_ sender: Any?) {
-        // 在这里执行你的自定义操作
-        print("Search Action")
         evaluateJavaScript(getSearchSelectionJS) {(result, error) in
             if let dict = (result as? NSDictionary),
                let sentence = dict["sentence"] as? String,

@@ -18,6 +18,7 @@ struct URLBar: View {
     @FocusState var isFocused: Bool
     @State var isInputing = false
     @State var isFavouriteSitesSheetPresented = false
+    @State var isSettingSheetPresented = false
     @State var pageFavouriteIndex: Int? = nil
     @State var isMinimized = false
     
@@ -62,6 +63,11 @@ struct URLBar: View {
             pageFavouriteIndex = sitesSetting.favouriteSites.firstIndex(where: { $0.url == urlManager.url })
             favouriteSitesSettingModel.save()
         }
+        .sheet(isPresented: $isSettingSheetPresented) {
+            NavigationStack {
+                SettingsView()
+            }
+        }
     }
     
     var toolbarItems: some View {
@@ -86,6 +92,9 @@ struct URLBar: View {
                             .frame(idealWidth: 400, idealHeight: 650)
                             .presentationDetents([.medium, .large])
                     }
+                Button {
+                    isSettingSheetPresented = true
+                } label: { Label("Setting", systemImage: "gear") }
                 Spacer()
                 Button {
                     urlManager.goBack?()

@@ -18,9 +18,6 @@ struct MappingTextEditor: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
-        
-        print(variables)
-        
         textView.backgroundColor = UIColor.init(white: 1, alpha: 0)
         
         textView.delegate = context.coordinator
@@ -44,14 +41,12 @@ struct MappingTextEditor: UIViewRepresentable {
         }
         
         func textViewDidChange(_ textView: UITextView) {
-            print("textViewDidChange")
             DispatchQueue.main.async {
                 self.parent.textModel.text = textView.text
             }
         }
         
         func textViewDidChangeSelection(_ textView: UITextView) {
-            print("textViewDidChangeSelection: \(textView.selectedRange)")
             DispatchQueue.main.async {
                 self.parent.textModel.selectedRange = textView.selectedRange
             }

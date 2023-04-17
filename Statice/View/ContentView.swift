@@ -17,7 +17,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Namespace private var animationNamespace
-    @State var isBrowsingWebsite = false
+    @State var isBrowsingWebsite = true
     
     var body: some View {
         if (isBrowsingWebsite) {
