@@ -28,3 +28,4 @@ A iOS application for adding new words to Anki while reading novels.
   - [ ] 增加其他功能？
     - [ ] 增加txt阅读等
     - [ ] 更合逻辑的界面
+    - [ ]　改进词典信息

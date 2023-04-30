@@ -18,11 +18,13 @@
 		CE0BDB8629DAB15700D62068 /* AnkiSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BDB8529DAB15700D62068 /* AnkiSettings.swift */; };
 		CE0BDB8829DAB1D200D62068 /* FavouriteSites.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BDB8729DAB1D200D62068 /* FavouriteSites.swift */; };
 		CE0BDB8A29DAB52B00D62068 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0BDB8929DAB52B00D62068 /* DataModel.swift */; };
+		CE16181129FEB3A10075980F /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE16181029FEB3A10075980F /* CryptoSwift */; };
 		CE21662D29EC57B700E28FDA /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21662C29EC57B700E28FDA /* Selection.swift */; };
 		CE21B2F629CD460200D61772 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F529CD460200D61772 /* CustomWKWebView.swift */; };
 		CE21B2F929CD4BDA00D61772 /* Moji.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2F829CD4BDA00D61772 /* Moji.swift */; };
 		CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2FA29CD563700D61772 /* MojiResultView.swift */; };
 		CE26195229E2D94500790716 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26195129E2D94500790716 /* Reader.swift */; };
+		CE2BD8D129EE6602001587E4 /* mojiTtsFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BD8D029EE6602001587E4 /* mojiTtsFetch.swift */; };
 		CE7AC7D629D0C533007DDEB2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AC7D529D0C533007DDEB2 /* SettingsView.swift */; };
 		CE7AC7D829D0DAA0007DDEB2 /* AnkiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AC7D729D0DAA0007DDEB2 /* AnkiData.swift */; };
 		CE83A2CA29CC12FC00AA5D32 /* StaticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */; };
@@ -68,6 +70,7 @@
 		CE21B2F829CD4BDA00D61772 /* Moji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moji.swift; sourceTree = "<group>"; };
 		CE21B2FA29CD563700D61772 /* MojiResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojiResultView.swift; sourceTree = "<group>"; };
 		CE26195129E2D94500790716 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
+		CE2BD8D029EE6602001587E4 /* mojiTtsFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mojiTtsFetch.swift; sourceTree = "<group>"; };
 		CE7AC7D529D0C533007DDEB2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CE7AC7D729D0DAA0007DDEB2 /* AnkiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiData.swift; sourceTree = "<group>"; };
 		CE83A2C629CC12FC00AA5D32 /* Statice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Statice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE16181129FEB3A10075980F /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +129,7 @@
 				CE0BD6AF29D4080A008B6CE5 /* SearchAll.swift */,
 				CE0BD6AD29D407D9008B6CE5 /* nlt-fetchManyLatestWords.swift */,
 				CE0BD6AB29D407B3008B6CE5 /* search_v3.swift */,
+				CE2BD8D029EE6602001587E4 /* mojiTtsFetch.swift */,
 			);
 			path = Moji;
 			sourceTree = "<group>";
@@ -270,6 +275,9 @@
 			dependencies = (
 			);
 			name = Statice;
+			packageProductDependencies = (
+				CE16181029FEB3A10075980F /* CryptoSwift */,
+			);
 			productName = DataTaskProgress;
 			productReference = CE83A2C629CC12FC00AA5D32 /* Statice.app */;
 			productType = "com.apple.product-type.application";
@@ -298,6 +306,9 @@
 				Base,
 			);
 			mainGroup = CE83A2BD29CC12FC00AA5D32;
+			packageReferences = (
+				CE16180F29FEB3A10075980F /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+			);
 			productRefGroup = CE83A2C729CC12FC00AA5D32 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -332,6 +343,7 @@
 				CE0BD6A729D30F17008B6CE5 /* MappingEditor.swift in Sources */,
 				CE0BDB8629DAB15700D62068 /* AnkiSettings.swift in Sources */,
 				CEAFCB1529D0677C00785432 /* SearchBar.swift in Sources */,
+				CE2BD8D129EE6602001587E4 /* mojiTtsFetch.swift in Sources */,
 				CE0BD6B029D4080A008B6CE5 /* SearchAll.swift in Sources */,
 				CE0BD6AE29D407D9008B6CE5 /* nlt-fetchManyLatestWords.swift in Sources */,
 				CEA586C829D8100F0076FF74 /* Published+Codable.swift in Sources */,
@@ -493,7 +505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCD9J36525;
+				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -510,7 +522,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = blance.statice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -530,7 +542,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Statice/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCD9J36525;
+				DEVELOPMENT_TEAM = 6PVAPR495F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Statice/Info.plist;
@@ -547,7 +559,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = blance.statice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -579,6 +591,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE16180F29FEB3A10075980F /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE16181029FEB3A10075980F /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE16180F29FEB3A10075980F /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE83A2BE29CC12FC00AA5D32 /* Project object */;
 }

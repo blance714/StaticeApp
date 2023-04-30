@@ -18,6 +18,7 @@ struct MojiResultView: View {
         Group {
             if let wordResult = wordResult {
                 MojiWordView(
+                    searchResult: searchResult,
                     title: title,
                     wordResult: wordResult,
                     translationResult: translationResult)
@@ -84,6 +85,7 @@ class MojiShowNoteViewAction: ObservableObject {
 }
 
 struct MojiWordView: View {
+    let searchResult: MojiSearchResult
     let title: String
     let wordResult: MojiFetchWordsResponse.Result.Word
     let translationResult: TranslationResult?
@@ -122,6 +124,14 @@ struct MojiWordView: View {
                     Text(wordResult.word.accent ?? "")
                         .font(.footnote)
                 }
+//                Spacer()
+//                Button {
+//                    mojiTtsFetchPublisher(tarId: searchResult.id, tarType: 102)
+                            //TODO
+//                } label: {
+//                    Label("Play", systemImage: "speaker.wave.2")
+//                        .labelStyle(.iconOnly)
+//                }
             }
             Text("\(wordResult.details[0].title)")
                 .font(.footnote)

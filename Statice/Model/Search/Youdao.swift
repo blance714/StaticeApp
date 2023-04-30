@@ -2,78 +2,66 @@
 //  Youdao.swift
 //  Statice
 //
-//  Created by blance on 2023/4/1.
+//  Created by blance on 2023/4/28.
 //
 
 import Foundation
 import CryptoKit
-
-func md5Hash(_ input: String) -> String {
-    let digest = Insecure.MD5.hash(data: input.data(using: .utf8)!)
-    return digest.map { String(format: "%02hhx", $0) }.joined()
-}
-
-func getSign(param: String, salt: String) -> String {
-    return md5Hash("fanyideskweb" + param + salt + "Ygy_4c=r#e#4EX^NUGUc5")
-}
+import Combine
+import CryptoSwift
 
 func youdaoTranslateSentence(param: String, handler: @escaping (String) -> Void) {
-    let appVersion = "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36 Edg/103.0.1264.62"
+    let client = "fanyideskweb"
+    let product = "webfanyi"
+    let pointParam = "client%2CmysticTime%2Cproduct"
+    let appVersion = "1.0.0"
+    let vendor = "web"
+    let keyfrom = "fanyi.web"
+    let mysticTime = Int(Date().timeIntervalSince1970) * 1000
     
-    let param = param.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
+    let key = "fsdsogkndfokasodnaso"
     
-    let time = String(Int(Date().timeIntervalSince1970 * 1000))
-    let salt = time + String(Int.random(in: 0..<10))
-    let body: [String: String] = [
-        "i": param,
-        "from": "AUTO",
-        "to": "AUTO",
-        "smartresult": "dict",
-        "client": "fanyideskweb",
-        "salt": salt,
-        "sign": getSign(param: param, salt: salt),
-        "lts": time,
-        "bv": md5Hash(appVersion),
-        "doctype": "json",
-        "version": "2.1",
-        "keyfrom": "fanyi.web",
-        "action": "FY_BY_CLICKBUTTION"
+    let query: [String: String] = [
+        "i": param.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
+        "from": "ja",
+        "to": "zh-CHS",
+        "dictResult": "true",
+        "keyid": "webfanyi",
     ]
     
-    let bodyString = body.map { "\($0)=\($1)" }.joined(separator: "&").addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    var params: [String: String] = query
+    params["sign"] = Insecure.MD5.hash(data: "client=\(client)&mysticTime=\(mysticTime)&product=\(product)&key=\(key)".data(using: .utf8)!).map { String(format: "%02x", $0) }.joined()
+    params["client"] = client
+    params["product"] = product
+    params["appVersion"] = appVersion
+    params["vendor"] = vendor
+    params["pointParam"] = pointParam
+    params["mysticTime"] = mysticTime.description
+    params["keyfrom"] = keyfrom
     
-    var request = URLRequest(url: URL(string: "https://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule")!)
+    let bodyStr =  ["i","from","to","dictResult","keyid","sign","client","product","appVersion","vendor","pointParam","mysticTime","keyfrom"].map{($0, params[$0]!)}.map{ (tag, value) in  "\(tag)=\(value)" }.joined(separator: "&")
+    
+    let url = URL(string: "https://dict.youdao.com/webtranslate")!
+    var request = URLRequest(url: url)
     request.httpMethod = "POST"
-    request.httpBody = Data(bodyString.utf8)
-    request.setValue("application/json, text/javascript, */*; q=0.01", forHTTPHeaderField: "accept")
-    request.setValue("ja,en;q=0.9,en-GB;q=0.8,en-US;q=0.7", forHTTPHeaderField: "accept-language")
-    request.setValue("application/x-www-form-urlencoded; charset=UTF-8", forHTTPHeaderField: "content-type")
-    request.setValue("OUTFOX_SEARCH_USER_ID=1796239350@10.110.96.157", forHTTPHeaderField: "cookie")
-    request.setValue("https://fanyi.youdao.com/", forHTTPHeaderField: "Referer")
-    request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62", forHTTPHeaderField: "User-Agent")
+    request.addValue("application/json, text/plain, */*", forHTTPHeaderField: "accept")
+    request.addValue("en,zh;q=0.9,ja;q=0.8", forHTTPHeaderField: "accept-language")
+    request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+    request.addValue("OUTFOX_SEARCH_USER_ID=1796239350@10.110.96.157;", forHTTPHeaderField: "cookie")
+    request.addValue("https://fanyi.youdao.com/", forHTTPHeaderField: "Referer")
+    request.httpBody = bodyStr.data(using: .utf8)
     
     URLSession.shared.dataTask(with: request) { data, _, error in
         do {
-            if let data = data, let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-               let errorCode = json["errorCode"] as? Int,
+            if let data = data,
+               let stringData = String(data: data, encoding: .utf8),
+               let decodedData = decodeAES128(stringData)?.data(using: .utf8),
+               let json = try JSONSerialization.jsonObject(with: decodedData, options: []) as? [String: Any],
+               let errorCode = json["code"] as? Int,
                errorCode == 0,
-               let translateResult = json["translateResult"] as? [[[String: Any]]] {
-                
-                if let smartResult = json["smartResult"] as? [String: Any],
-                   let entries = smartResult["entries"] as? [String],
-                   entries.count > 1 {
-                    handler(entries[1])
-                } else {
-                    var string = ""
-                    for results in translateResult {
-                        for result in results {
-                            if let tgt = result["tgt"] as? String {
-                                string = string + tgt;
-                            }
-                        }
-                    }
-                    handler(string)
-                }
+               let translateResults = json["translateResult"] as? [[[String: Any]]]
+            {
+                handler(translateResults.map{ $0[0]["tgt"] as? String ?? "" }.joined(separator: ""))
             } else {
                 handler("")
             }
@@ -83,3 +71,33 @@ func youdaoTranslateSentence(param: String, handler: @escaping (String) -> Void)
     }.resume()
 }
 
+func decodeAES128(_ t: String) -> String? {
+    let key = "ydsecret://query/key/B*RGygVywfNBwpmBaZg*WT7SIOUP2T0C9WHMZN39j^DAdaZhAnxvGcCY6VYFwnHl"
+    let lv = "ydsecret://query/iv/C@lZe2YzHtZ2CYgaXKSVfsb7Y4QWHjITPPZ0nQp87fBeJ!Iv6v^6fvi2WN@bYpJ4"
+    
+    guard let keyData = key.data(using: .utf8),
+          let lvData = lv.data(using: .utf8) else {
+        return nil
+    }
+    
+    let base64String = t.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
+    guard let tData = Data(base64Encoded: base64String) else {
+        return nil
+    }
+    
+    
+    let fo = Insecure.MD5.hash(data: keyData)
+    let fn = Insecure.MD5.hash(data: lvData)
+    
+    let a = Data(fo)
+    let i = Data(fn)
+    
+    do {
+        let aes = try AES(key: [UInt8](a), blockMode: CBC(iv: [UInt8](i)), padding: .pkcs7)
+        let decryptedData = try aes.decrypt([UInt8](tData))
+        return String(data: Data(decryptedData), encoding: .utf8)
+    } catch {
+        print("Error decrypting: \(error)")
+        return nil
+    }
+}
