@@ -1,0 +1,129 @@
+/* No comment provided by engineer. */
+"Add Note to Anki" = "添加笔记到 Anki";
+
+/* No comment provided by engineer. */
+"Add to Anki" = "添加到 Anki";
+
+/* No comment provided by engineer. */
+"Allow duplicating" = "允许重复笔记";
+
+/* No comment provided by engineer. */
+"Choose a dictionary to map." = "选择一个要使用的词典。";
+
+/* No comment provided by engineer. */
+"Choose a field to edit the mapping content." = "选择一个字段以编辑映射选项。";
+
+/* No comment provided by engineer. */
+"Connect with Anki" = "连接到 Anki";
+
+/* No comment provided by engineer. */
+"Deck" = "牌组";
+
+/* No comment provided by engineer. */
+"Decoding Error" = "解码错误";
+
+/* No comment provided by engineer. */
+"Dictionary" = "词典";
+
+/* No comment provided by engineer. */
+"Dismiss" = "隐藏";
+
+/* No comment provided by engineer. */
+"Done" = "完成";
+
+/* No comment provided by engineer. */
+"Edit favourite" = "编辑收藏";
+
+/* No comment provided by engineer. */
+"Enter text here" = "输入文本";
+
+/* No comment provided by engineer. */
+"Enter URL here" = "输入 URL";
+
+/* No comment provided by engineer. */
+"Error" = "错误";
+
+/* No comment provided by engineer. */
+"Favourites" = "收藏";
+
+/* No comment provided by engineer. */
+"Fields to map" = "要映射的字段";
+
+/* No comment provided by engineer. */
+"Get profiles from Anki app." = "从 Anki 应用同步设置。";
+
+/* No comment provided by engineer. */
+"Go back" = "返回";
+
+/* No comment provided by engineer. */
+"Go forward" = "前进";
+
+/* No comment provided by engineer. */
+"Mapping" = "映射";
+
+/* No comment provided by engineer. */
+"Minimize" = "最小化";
+
+/* No comment provided by engineer. */
+"Name" = "名字";
+
+/* No comment provided by engineer. */
+"No Anki data." = "没有 Anki 数据。";
+
+/* No comment provided by engineer. */
+"No corresponding note type." = "没有对应的笔记类型。";
+
+/* No comment provided by engineer. */
+"No result." = "无结果。";
+
+/* No comment provided by engineer. */
+"Note Type" = "笔记类型";
+
+/* No comment provided by engineer. */
+"Play" = "播放";
+
+/* No comment provided by engineer. */
+"Play audio" = "播放音频";
+
+/* No comment provided by engineer. */
+"Please check your Anki settings." = "请检查你的 Anki 设置。";
+
+/* No comment provided by engineer. */
+"Please fetch Anki datas in setting." = "请在设置中同步 Anki 设置。";
+
+/* No comment provided by engineer. */
+"Reader" = "阅读器";
+
+/* No comment provided by engineer. */
+"Refresh Anki data" = "重新同步 Anki 设置";
+
+/* No comment provided by engineer. */
+"Reload" = "刷新";
+
+/* Search editmenu option */
+"Search" = "搜索";
+
+/* No comment provided by engineer. */
+"Setting" = "设置";
+
+/* No comment provided by engineer. */
+"Settings" = "设置";
+
+/* No comment provided by engineer. */
+"Stop" = "停止";
+
+/* Translate editmenu option */
+"Translate" = "翻译";
+
+/* No comment provided by engineer. */
+"Translation" = "翻译";
+
+/* No comment provided by engineer. */
+"URL illegal." = "URL 不合法。";
+
+/* No comment provided by engineer. */
+"Words" = "单词";
+
+/* No comment provided by engineer. */
+"Youdao Translate" = "有道翻译";
+

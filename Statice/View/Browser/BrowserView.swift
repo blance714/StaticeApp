@@ -33,20 +33,22 @@ struct BrowserView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 ZStack {
-                    WebView(urlManager: urlManager, handleSearch: { selection in
-                        isSearchSheetPresented = true
-                        selectionRect = selection.rect
-                        wordSearchManager.handleSearch(searchText: selection.selection, sentenceSelection: selection.sentence)
-                    }, handleTranslate: { selection in
-                        isTranslationSheetPresented = true
-                        selectionRect = selection.rect
-                        wordSearchManager.handleTranslate(sentence: selection.selection, bold: nil)
-                    })
+                    WebView(urlManager: urlManager, handleSearch: handleSearch(_:), handleTranslate: handleTranslation(_:))
+                        .zIndex(1)
                     if urlManager.isReaderModeEnabled {
-                        ReaderModeView(urlManager: urlManager)
+                        ReaderView(urlManager: urlManager, handleSearch: handleSearch(_:), handleTranslate: handleTranslation(_:))
+                            .zIndex(2)
                     }
+                    VStack {
+                        Color(.systemBackground)
+                            .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top)
+                            .edgesIgnoringSafeArea(.top)
+                        Spacer()
+                    }
+                    .zIndex(3)
                 }
                 .animation(.easeInOut, value: urlManager.isReaderModeEnabled)
+                .background(ignoresSafeAreaEdges: .top)
                 URLBar(urlManager: urlManager,
                        handleSubmit: urlManager.handleURLRequest,
                        animationNamespace: animationNamespace)
@@ -60,42 +62,25 @@ struct BrowserView: View {
                 .frame(idealWidth: 400, idealHeight: 650)
                 .presentationDetents([.medium, .large])
             }
-                .popover(isPresented: $isTranslationSheetPresented, attachmentAnchor: .rect(.rect(selectionRect))) {
-                TranslationView(translationResult: wordSearchManager.translationResult)
-                    .frame(idealWidth: 400, maxHeight: 650)
-                    .presentationDetents([.medium, .large])
+            .popover(isPresented: $isTranslationSheetPresented, attachmentAnchor: .rect(.rect(selectionRect))) {
+            TranslationView(translationResult: wordSearchManager.translationResult)
+                .frame(idealWidth: 400, maxHeight: 650)
+                .presentationDetents([.medium, .large])
             }
             .background(.background)
         }
     }
-}
-
-struct ReaderModeView: View {
-    @ObservedObject var urlManager: URLManager
     
-    @State var readerData: ReaderData?
-    
-    var body: some View {
-        ScrollView {
-            if let readerData = readerData {
-                Text(readerData.article)
-            } else {
-                ProgressView()
-                    .onAppear {
-                        fetchData()
-                    }
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.background)
+    func handleSearch(_ selection: SearchSelection) {
+        isSearchSheetPresented = true
+        selectionRect = selection.rect
+        wordSearchManager.handleSearch(searchText: selection.selection, sentenceSelection: selection.sentence)
     }
     
-    func fetchData() {
-        if let convert = urlManager.convertReaderModeData {
-            convert().sink { data in
-                readerData = data
-            }
-        }
+    func handleTranslation(_ selection: TranslateSelection) {
+        isTranslationSheetPresented = true
+        selectionRect = selection.rect
+        wordSearchManager.handleTranslate(sentence: selection.selection, bold: nil)
     }
 }
 

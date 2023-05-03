@@ -17,14 +17,9 @@ import SwiftUI
 
 struct ContentView: View {
     @Namespace private var animationNamespace
-    @State var isBrowsingWebsite = true
     
     var body: some View {
-        if (isBrowsingWebsite) {
-            BrowserView(animationNamespace: animationNamespace)
-        } else {
-            WordSearchView(isBrowsingWebsite: $isBrowsingWebsite, animationNamespace: animationNamespace)
-        }
+        BrowserView(animationNamespace: animationNamespace)
     }
 }
 

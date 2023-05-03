@@ -25,13 +25,17 @@
 		CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B2FA29CD563700D61772 /* MojiResultView.swift */; };
 		CE26195229E2D94500790716 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26195129E2D94500790716 /* Reader.swift */; };
 		CE2BD8D129EE6602001587E4 /* mojiTtsFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BD8D029EE6602001587E4 /* mojiTtsFetch.swift */; };
+		CE7A81F229FFF511002B5D5C /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A81F129FFF511002B5D5C /* Audio.swift */; };
+		CE7A81F42A00DB95002B5D5C /* Publisher+playAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A81F32A00DB95002B5D5C /* Publisher+playAudio.swift */; };
 		CE7AC7D629D0C533007DDEB2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AC7D529D0C533007DDEB2 /* SettingsView.swift */; };
 		CE7AC7D829D0DAA0007DDEB2 /* AnkiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7AC7D729D0DAA0007DDEB2 /* AnkiData.swift */; };
+		CE81AEB12A025D5A0004438A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE81AEAF2A025D5A0004438A /* Localizable.strings */; };
+		CE81AEB52A0287D00004438A /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81AEB42A0287D00004438A /* ReaderView.swift */; };
+		CE81AEB72A0295E70004438A /* ReaderArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81AEB62A0295E70004438A /* ReaderArticleView.swift */; };
 		CE83A2CA29CC12FC00AA5D32 /* StaticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */; };
 		CE83A2CC29CC12FC00AA5D32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83A2CB29CC12FC00AA5D32 /* ContentView.swift */; };
 		CE83A2CE29CC12FD00AA5D32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE83A2CD29CC12FD00AA5D32 /* Assets.xcassets */; };
 		CE83A2D129CC12FD00AA5D32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE83A2D029CC12FD00AA5D32 /* Preview Assets.xcassets */; };
-		CE83A2D829CC131600AA5D32 /* URLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83A2D729CC131600AA5D32 /* URLSessionDelegate.swift */; };
 		CE9511BC29D20EA50001A0F0 /* MappingTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9511BB29D20EA50001A0F0 /* MappingTextEditor.swift */; };
 		CEA586C829D8100F0076FF74 /* Published+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA586C729D8100F0076FF74 /* Published+Codable.swift */; };
 		CEA586CC29D82D880076FF74 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA586CB29D82D880076FF74 /* WebView.swift */; };
@@ -68,17 +72,21 @@
 		CE21662C29EC57B700E28FDA /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		CE21B2F529CD460200D61772 /* CustomWKWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
 		CE21B2F829CD4BDA00D61772 /* Moji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moji.swift; sourceTree = "<group>"; };
-		CE21B2FA29CD563700D61772 /* MojiResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojiResultView.swift; sourceTree = "<group>"; };
+		CE21B2FA29CD563700D61772 /* MojiResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MojiResultView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CE26195129E2D94500790716 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		CE2BD8D029EE6602001587E4 /* mojiTtsFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mojiTtsFetch.swift; sourceTree = "<group>"; };
+		CE7A81F129FFF511002B5D5C /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		CE7A81F32A00DB95002B5D5C /* Publisher+playAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+playAudio.swift"; sourceTree = "<group>"; };
 		CE7AC7D529D0C533007DDEB2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CE7AC7D729D0DAA0007DDEB2 /* AnkiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiData.swift; sourceTree = "<group>"; };
+		CE81AEB02A025D5A0004438A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CE81AEB42A0287D00004438A /* ReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderView.swift; sourceTree = "<group>"; };
+		CE81AEB62A0295E70004438A /* ReaderArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderArticleView.swift; sourceTree = "<group>"; };
 		CE83A2C629CC12FC00AA5D32 /* Statice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Statice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticeApp.swift; sourceTree = "<group>"; };
 		CE83A2CB29CC12FC00AA5D32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE83A2CD29CC12FD00AA5D32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE83A2D029CC12FD00AA5D32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CE83A2D729CC131600AA5D32 /* URLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDelegate.swift; sourceTree = "<group>"; };
 		CE9511BB29D20EA50001A0F0 /* MappingTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingTextEditor.swift; sourceTree = "<group>"; };
 		CEA586C729D8100F0076FF74 /* Published+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Codable.swift"; sourceTree = "<group>"; };
 		CEA586CB29D82D880076FF74 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -159,6 +167,8 @@
 				CE0BD6A829D40144008B6CE5 /* NSAttributedString.swift */,
 				CEA586C729D8100F0076FF74 /* Published+Codable.swift */,
 				CE21662C29EC57B700E28FDA /* Selection.swift */,
+				CE7A81F129FFF511002B5D5C /* Audio.swift */,
+				CE7A81F32A00DB95002B5D5C /* Publisher+playAudio.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,14 +193,13 @@
 		CE83A2C829CC12FC00AA5D32 /* Statice */ = {
 			isa = PBXGroup;
 			children = (
-				CECE57AF29ED210900CD1C71 /* Resource */,
+				CECE57AF29ED210900CD1C71 /* Resources */,
 				CEC66CF729D7415900E9D3CC /* TestData.swift */,
 				CEAFCB0629CF4CC900785432 /* Info.plist */,
+				CE81AEAF2A025D5A0004438A /* Localizable.strings */,
 				CE83A2C929CC12FC00AA5D32 /* StaticeApp.swift */,
 				CEAFCB0729CFEA5500785432 /* View */,
 				CE21B2F729CD4B9600D61772 /* Model */,
-				CE83A2D729CC131600AA5D32 /* URLSessionDelegate.swift */,
-				CE83A2CD29CC12FD00AA5D32 /* Assets.xcassets */,
 				CE83A2CF29CC12FD00AA5D32 /* Preview Content */,
 			);
 			path = Statice;
@@ -221,6 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				CEAFCB0829CFEA7500785432 /* BrowserView.swift */,
+				CE81AEB42A0287D00004438A /* ReaderView.swift */,
+				CE81AEB62A0295E70004438A /* ReaderArticleView.swift */,
 				CEA586CB29D82D880076FF74 /* WebView.swift */,
 				CE21B2F529CD460200D61772 /* CustomWKWebView.swift */,
 				CE0BDB8329DA56FF00D62068 /* URLBar.swift */,
@@ -251,12 +262,13 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
-		CECE57AF29ED210900CD1C71 /* Resource */ = {
+		CECE57AF29ED210900CD1C71 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE83A2CD29CC12FD00AA5D32 /* Assets.xcassets */,
 				CECE57AE29ED20F500CD1C71 /* intro.html */,
 			);
-			path = Resource;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +316,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = CE83A2BD29CC12FC00AA5D32;
 			packageReferences = (
@@ -324,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CECE57B129ED2A4400CD1C71 /* intro.html in Resources */,
+				CE81AEB12A025D5A0004438A /* Localizable.strings in Resources */,
 				CE83A2D129CC12FD00AA5D32 /* Preview Assets.xcassets in Resources */,
 				CE83A2CE29CC12FD00AA5D32 /* Assets.xcassets in Resources */,
 			);
@@ -336,6 +350,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE81AEB52A0287D00004438A /* ReaderView.swift in Sources */,
+				CE7A81F42A00DB95002B5D5C /* Publisher+playAudio.swift in Sources */,
 				CEA586CE29D8475A0076FF74 /* Youdao.swift in Sources */,
 				CEE3720B29D88A3F00D7E992 /* TranslationView.swift in Sources */,
 				CE0BDB8A29DAB52B00D62068 /* DataModel.swift in Sources */,
@@ -360,6 +376,7 @@
 				CE26195229E2D94500790716 /* Reader.swift in Sources */,
 				CEAFCB1029CFEF5D00785432 /* WordResultView.swift in Sources */,
 				CE21B2FB29CD563700D61772 /* MojiResultView.swift in Sources */,
+				CE7A81F229FFF511002B5D5C /* Audio.swift in Sources */,
 				CEF1E5C829E44246005C6434 /* String+Error.swift in Sources */,
 				CE9511BC29D20EA50001A0F0 /* MappingTextEditor.swift in Sources */,
 				CE7AC7D629D0C533007DDEB2 /* SettingsView.swift in Sources */,
@@ -368,10 +385,10 @@
 				CEA586CC29D82D880076FF74 /* WebView.swift in Sources */,
 				CE0BD6A429D2E3BD008B6CE5 /* TextModel.swift in Sources */,
 				CEC66CF829D7415900E9D3CC /* TestData.swift in Sources */,
-				CE83A2D829CC131600AA5D32 /* URLSessionDelegate.swift in Sources */,
 				CE0BD6AC29D407B3008B6CE5 /* search_v3.swift in Sources */,
 				CE21B2F629CD460200D61772 /* CustomWKWebView.swift in Sources */,
 				CED3542529DBB026008570D9 /* FavouriteSitesView.swift in Sources */,
+				CE81AEB72A0295E70004438A /* ReaderArticleView.swift in Sources */,
 				CEAFCB0C29CFEB6000785432 /* URLManager.swift in Sources */,
 				CE0BD6B429D49C11008B6CE5 /* Search.swift in Sources */,
 				CE83A2CA29CC12FC00AA5D32 /* StaticeApp.swift in Sources */,
@@ -379,6 +396,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CE81AEAF2A025D5A0004438A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE81AEB02A025D5A0004438A /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CE83A2D229CC12FD00AA5D32 /* Debug */ = {
@@ -431,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -485,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -521,7 +549,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.5;
+				MARKETING_VERSION = 0.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -558,7 +586,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.5;
+				MARKETING_VERSION = 0.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bingyan.statice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

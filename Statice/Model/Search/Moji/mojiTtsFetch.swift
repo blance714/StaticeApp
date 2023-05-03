@@ -32,18 +32,22 @@ struct mojiTtsFetchResponseBody: Codable {
     }
 }
 
-func mojiTtsFetchPublisher(tarId: String, tarType: Int) -> any Publisher<String, Error> {
+func mojiTtsFetchPublisher(tarId: String, tarType: Int) -> AnyPublisher<String, Error> {
     let url = URL(string: "https://api.mojidict.com/parse/functions/tts-fetch")!
     var request = URLRequest(url: url)
+    request.timeoutInterval = 3
     
     let postBody = mojiTtsFetchPostBody(tarId: tarId, tarType: tarType)
     
     request.httpMethod = "POST"
     request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+    request.setValue("api.mojidict.com", forHTTPHeaderField: "Host")
+    request.setValue("E62VyFVLMiW7kvbtVq3p", forHTTPHeaderField: "X-Parse-Application-Id")
     do {
         try request.httpBody = JSONEncoder().encode(postBody)
     } catch let error {
         return Fail(error: error)
+            .eraseToAnyPublisher()
     }
     
     return URLSession.shared.dataTaskPublisher(for: request)
@@ -53,4 +57,5 @@ func mojiTtsFetchPublisher(tarId: String, tarType: Int) -> any Publisher<String,
             guard let url = data.result?.result?.url else { throw URLError(.badServerResponse) }
             return url
         }
+        .eraseToAnyPublisher()
 }

@@ -28,8 +28,11 @@ class URLManager: ObservableObject {
     ) -> Void)?
     
     @Published var isReaderModeEnabled: Bool = false
-    @Published var isReaderModeAvaliable: Bool = false
-    var convertReaderModeData: (() -> AnyPublisher<ReaderData, Never>)?
+    @Published var readerModeConfig: ReaderModeConfig?
+    var isReaderModeAvaliable: Bool {
+        readerModeConfig != nil
+    }
+//    var convertReaderModeData: (() -> AnyPublisher<ReaderData, Never>)?
     
     var didFinishPublisher = PassthroughSubject<Void, Never>()
     var didFinishCancellable: AnyCancellable? = nil
@@ -37,9 +40,10 @@ class URLManager: ObservableObject {
     init(url: URL = Bundle.main.url(forResource: "intro", withExtension: "html") ?? URL(string: "about:blank")!) {
         self.url = url
         
-//        didFinishCancellable = didFinishPublisher.sink {
-//            self.checkIfReaderModeAvaliable()
-//        }
+        didFinishCancellable = didFinishPublisher.sink {
+            print("didFinish")
+            self.checkIfReaderModeAvaliable()
+        }
     }
     
     func handleURLRequest(urlText: String) {
@@ -84,6 +88,11 @@ class URLManager: ObservableObject {
                 print("URL: \(String(describing: url)), isLoading: \(webView.isLoading)")
                 DispatchQueue.main.async {
                     self.url = url
+                    self.isReaderModeEnabled = false
+                    self.readerModeConfig = nil
+                    if !webView.isLoading {
+                        self.checkIfReaderModeAvaliable()
+                    }
                 }
             }
         }
@@ -117,21 +126,22 @@ class URLManager: ObservableObject {
     }
     
     func checkIfReaderModeAvaliable() {
-        ReaderModeList.forEach { readerMode in
-            if url.absoluteString.contains(readerMode.pattern) {
-                self.isReaderModeAvaliable = true
-                convertReaderModeData = {
-                    readerMode.convert(self)
-                        .catch { error in
-                            self.isReaderModeAvaliable = false
-                            self.isReaderModeEnabled = false
-                            self.convertReaderModeData = nil
-                            return Just(ReaderData(article: "Cannot fetch novel content."))
-                        }
-                        .assertNoFailure()
-                        .eraseToAnyPublisher()
-                }
+        self.readerModeConfig = nil
+        ReaderModeConfigList.forEach { readerModeConfig in
+            if url.absoluteString.contains(readerModeConfig.pattern) {
+                self.readerModeConfig = readerModeConfig
             }
         }
+    }
+    
+    func readerModeDataPublisher() -> AnyPublisher<ReaderData, Never> {
+        readerModeConfig?.convert(self)
+            .catch { error in
+                return Just(ReaderData(article: "Cannot fetch novel content. Error: \(error)"))
+            }
+            .assertNoFailure()
+            .eraseToAnyPublisher()
+        ?? Just(ReaderData(article: "No reader mode config avaliable."))
+            .eraseToAnyPublisher()
     }
 }

@@ -7,77 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E46F8C67-EF58-4D2C-8AC9-D640D5B70742"
+            uuid = "5324270F-741A-4AC8-BD1E-2570D94CB51E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Statice/Model/Search/Youdao.swift"
+            filePath = "Statice/Model/Reader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "youdaoTranslateSentence(param:handler:)"
-            landmarkType = "9">
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "E46F8C67-EF58-4D2C-8AC9-D640D5B70742 - 54fd85d1fc2bb3e2"
+                  uuid = "5324270F-741A-4AC8-BD1E-2570D94CB51E - 563a3ab34b725f1d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #4 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Statice.youdaoTranslateSentence(param: Swift.String, handler: (Swift.String) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 ((Swift.Result&lt;Statice.ReaderData, Swift.Error&gt;) -&gt; ()) -&gt; () in closure #1 (Statice.URLManager) -&gt; Combine.AnyPublisher&lt;Statice.ReaderData, Swift.Error&gt; in variable initialization expression of Statice.ReaderModeConfigList : Swift.Array&lt;Statice.ReaderModeConfig&gt;"
                   moduleName = "Statice"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Search/Youdao.swift"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Reader.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "1572">
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "168">
                </Location>
                <Location
-                  uuid = "E46F8C67-EF58-4D2C-8AC9-D640D5B70742 - 54fd85d1fc2bb3e2"
+                  uuid = "5324270F-741A-4AC8-BD1E-2570D94CB51E - 8bab8c093a0618a8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #4 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Statice.youdaoTranslateSentence(param: Swift.String, handler: (Swift.String) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Result&lt;Any, Swift.Error&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Statice.ReaderData, Swift.Error&gt;) -&gt; ()) -&gt; () in closure #1 (Statice.URLManager) -&gt; Combine.AnyPublisher&lt;Statice.ReaderData, Swift.Error&gt; in variable initialization expression of Statice.ReaderModeConfigList : Swift.Array&lt;Statice.ReaderModeConfig&gt;"
                   moduleName = "Statice"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Search/Youdao.swift"
+                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Reader.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "1808">
-               </Location>
-               <Location
-                  uuid = "E46F8C67-EF58-4D2C-8AC9-D640D5B70742 - 54fd85d1fc2bb3e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Statice.youdaoTranslateSentence(param: Swift.String, handler: (Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "Statice"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Search/Youdao.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "1556">
-               </Location>
-               <Location
-                  uuid = "E46F8C67-EF58-4D2C-8AC9-D640D5B70742 - 54fd85d1fc2bb3e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Statice.youdaoTranslateSentence(param: Swift.String, handler: (Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "Statice"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/blance/Documents/StaticeApp/Statice/Model/Search/Youdao.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "1796">
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "108">
                </Location>
             </Locations>
          </BreakpointContent>

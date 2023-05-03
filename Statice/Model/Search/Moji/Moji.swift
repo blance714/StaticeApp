@@ -30,8 +30,10 @@ let MojiFieldVariables: [AnkiFieldVariable] = [
     .init(title: "音调", variable: "accent", systemImage: "music.note"),
     .init(title: "释义", variable: "define", systemImage: "character.book.closed"),
     .init(title: "词性", variable: "pos", systemImage: "tag"),
+    .init(title: "音频", variable: "audio", systemImage: "tag"),
     .init(title: "例句", variable: "sentence", systemImage: "text.quote"),
-    .init(title: "例句翻译", variable: "translation", systemImage: "globe")
+    .init(title: "例句翻译", variable: "translation", systemImage: "globe"),
+    .init(title: "例句音频", variable: "sentenceAudio", systemImage: "tag")
 ]
 
 struct MojiFieldVariableMap {
@@ -40,8 +42,10 @@ struct MojiFieldVariableMap {
     var accent: String?
     var define: String?
     var pos: String?
+    var audio: String?
     var sentence: String?
     var translation: String?
+    var sentenceAudio: String?
 }
 
 struct MojiFieldVariableConverter: AnkiFieldVariableConverter {
@@ -54,8 +58,10 @@ struct MojiFieldVariableConverter: AnkiFieldVariableConverter {
         case "accent":      return map.accent ?? ""
         case "define":      return map.define ?? ""
         case "pos":         return map.pos ?? ""
+        case "audio":       return map.audio ?? ""
         case "sentence":    return map.sentence ?? ""
         case "translation": return map.translation ?? ""
+        case "sentenceAudio":   return map.sentenceAudio ?? ""
         default:            return ""
         }
     }

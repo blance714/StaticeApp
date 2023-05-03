@@ -89,8 +89,8 @@ struct ConnectWithAnkiButton: View {
         } footer: {
             Text("Get profiles from Anki app.")
         }
-        .onChange(of: scenePhase) { phase in
-            if phase == .active, isReceivingAnkiData,
+        .onReceive(NotificationCenter.default.publisher(for: UIScene.didActivateNotification)) { _ in
+            if isReceivingAnkiData,
                let data = UIPasteboard.general.data(forPasteboardType: "net.ankimobile.json") {
                 isReceivingAnkiData = false
                 isConnectingWithAnki = false

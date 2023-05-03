@@ -40,8 +40,8 @@ class CustomWKWebView: WKWebView {
 
 extension CustomWKWebView {
     private func setupCustomMenu() {
-        let searchWordMenuItem = UIMenuItem(title: "Search", action: #selector(searchWordAction(_:)))
-        let translateMenuItem = UIMenuItem(title: "Translate", action: #selector(translateAction(_:)))
+        let searchWordMenuItem = UIMenuItem(title: NSLocalizedString("Search", comment: "Search editmenu option"), action: #selector(searchWordAction(_:)))
+        let translateMenuItem = UIMenuItem(title: NSLocalizedString("Translate", comment: "Translate editmenu option"), action: #selector(translateAction(_:)))
         UIMenuController.shared.menuItems = [searchWordMenuItem, translateMenuItem]
     }
     

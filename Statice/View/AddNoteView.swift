@@ -120,6 +120,16 @@ struct AddNoteView: View {
     }
     
     func addNotetoAnki() {
+        if let ankiData = ankiDataModel.ankiData,
+           let noteType = ankiData.notetypes.first(where: { $0.name == ankiSettingsModel.ankiSettings.noteType })
+        {
+            for field in noteType.fields {
+                if !fieldsValue.keys.contains(field.name) {
+                    loadField(fieldName: field.name)
+                }
+            }
+        }
+        
         let settings = ankiSettingsModel.ankiSettings
         var url = URL(string: "anki://x-callback-url/addnote")!
         var query = [
@@ -139,6 +149,7 @@ struct AddNoteView: View {
         
         url.append(queryItems: query)
         
+        print(url)
         UIApplication.shared.open(url)
     }
 }

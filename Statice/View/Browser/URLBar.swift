@@ -177,9 +177,7 @@ struct URLBar: View {
     
     var readerButton: some View {
         Button {
-            withAnimation {
-                urlManager.isReaderModeEnabled.toggle()
-            }
+            urlManager.isReaderModeEnabled.toggle()
         } label: {
             Label("Reader",
                   systemImage: urlManager.isReaderModeAvaliable
@@ -193,6 +191,7 @@ struct URLBar: View {
         .buttonStyle(.plain)
         .foregroundColor(urlManager.isReaderModeEnabled ? Color(.systemBackground): Color(.label))
         .background(urlManager.isReaderModeEnabled ? Color(.label): Color.clear)
+        .animation(.easeInOut, value: urlManager.isReaderModeEnabled)
     }
     
     var refreshButton: some View {

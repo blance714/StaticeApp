@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine
+import AVKit
 
 struct MojiResultView: View {
     let searchResult: MojiSearchResult
@@ -91,6 +93,9 @@ struct MojiWordView: View {
     let translationResult: TranslationResult?
     
     @StateObject var showAction = MojiShowNoteViewAction()
+    @State var ttsLoading = false
+    @State var ttsCancellable: AnyCancellable?
+    @State var audioPlayer: AVAudioPlayer?
     
     @Environment (\.scenePhase) private var scenePhase
 
@@ -116,22 +121,36 @@ struct MojiWordView: View {
 
     private var headerView: some View {
         VStack(alignment: .leading, spacing: 1) {
-            HStack(alignment: .lastTextBaseline, spacing: 20) {
-                Text(wordResult.word.spell ?? title)
-                    .font(.title)
-                HStack(alignment: .top, spacing: 0) {
-                    Text(wordResult.word.pron ?? "")
-                    Text(wordResult.word.accent ?? "")
-                        .font(.footnote)
+            HStack {
+                HStack(alignment: .lastTextBaseline, spacing: 20) {
+                    Text(wordResult.word.spell ?? title)
+                        .font(.title)
+                    HStack(alignment: .top, spacing: 0) {
+                        Text(wordResult.word.pron ?? "")
+                        Text(wordResult.word.accent ?? "")
+                            .font(.footnote)
+                    }
                 }
-//                Spacer()
-//                Button {
-//                    mojiTtsFetchPublisher(tarId: searchResult.id, tarType: 102)
-                            //TODO
-//                } label: {
-//                    Label("Play", systemImage: "speaker.wave.2")
-//                        .labelStyle(.iconOnly)
-//                }
+                Spacer()
+                Button {
+                    ttsLoading = true
+                    ttsCancellable = mojiTtsFetchPublisher(tarId: searchResult.id, tarType: 102)
+                        .getData()
+                        .sink { completion in
+                            ttsLoading = false
+                        } receiveValue: { data in
+                            audioPlayer = try? AVAudioPlayer(data: data)
+                            audioPlayer?.prepareToPlay()
+                            audioPlayer?.play()
+                        }
+                } label: {
+                    if ttsLoading {
+                        ProgressView()
+                    } else {
+                        Label("Play", systemImage: "speaker.wave.2")
+                            .labelStyle(.iconOnly)
+                    }
+                }
             }
             Text("\(wordResult.details[0].title)")
                 .font(.footnote)
@@ -142,6 +161,7 @@ struct MojiWordView: View {
     private var wordDetailsView: some View {
         ForEach(wordResult.subdetails) { subdetail in
             MojiSubdetailView(
+                searchResult: searchResult,
                 subdetail: subdetail,
                 wordResult: wordResult,
                 translationResult: translationResult)
@@ -150,11 +170,13 @@ struct MojiWordView: View {
 }
 
 struct MojiSubdetailView: View {
+    let searchResult: MojiSearchResult
     let subdetail: MojiFetchWordsResponse.Result.Word.Subdetail
     let wordResult: MojiFetchWordsResponse.Result.Word
     let translationResult: TranslationResult?
     
     @EnvironmentObject var showAction: MojiShowNoteViewAction
+    @State var ttsCancellable: AnyCancellable?
     
     var body: some View {
         let examples = wordResult.examples
@@ -169,16 +191,21 @@ struct MojiSubdetailView: View {
             .cornerRadius(10.0)
             .contextMenu {
                 Button {
-                    let map = MojiFieldVariableMap(
+                    var map = MojiFieldVariableMap(
                         spell: wordResult.word.spell,
                         pron: wordResult.word.pron,
                         accent: wordResult.word.accent,
                         define: subdetail.title,
                         pos: wordResult.details[0].title,
                         sentence: translationResult?.bold,
-                        translation: translationResult?.translation
+                        translation: translationResult?.translation,
+                        sentenceAudio: translationResult != nil ? "https://dict.youdao.com/dictvoice?audio=\(translationResult!.sentence.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&le=auto&fakepath=foo.mp3" : nil
                     )
-                    showAction.show(map: map)
+                    ttsCancellable = mojiTtsFetchPublisher(tarId: searchResult.id, tarType: 102)
+                        .receive(on: RunLoop.main)
+                        .sink { _ in
+                            showAction.show(map: map)
+                        } receiveValue: { map.audio = $0 }
                 } label: {
                     Label("Add to Anki", systemImage: "plus")
                 }
@@ -186,7 +213,7 @@ struct MojiSubdetailView: View {
             .padding(.top, 10)
 
             ForEach(examples.filter { $0.subdetailsId == subdetail.id }) { example in
-                ExampleView(subdetail: subdetail, wordResult: wordResult, example: example)
+                ExampleView(searchResult: searchResult, subdetail: subdetail, wordResult: wordResult, example: example)
                     .padding(.leading, 7)
             }
         }
@@ -194,11 +221,14 @@ struct MojiSubdetailView: View {
 }
 
 struct ExampleView: View {
+    let searchResult: MojiSearchResult
     let subdetail: MojiFetchWordsResponse.Result.Word.Subdetail
     let wordResult: MojiFetchWordsResponse.Result.Word
     let example: MojiFetchWordsResponse.Result.Word.Example
     
     @EnvironmentObject var showAction: MojiShowNoteViewAction
+    @State var ttsCancellable: AnyCancellable?
+    @State var audioPlayer: AVAudioPlayer?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -218,15 +248,40 @@ struct ExampleView: View {
         )
         .contextMenu {
             Button {
-                let map = MojiFieldVariableMap(
+                ttsCancellable = mojiTtsFetchPublisher(tarId: example.id, tarType: 103)
+                    .getData()
+                    .sink { _ in } receiveValue: { data in
+                        audioPlayer = try? AVAudioPlayer(data: data)
+                        audioPlayer?.prepareToPlay()
+                        audioPlayer?.play()
+                    }
+            } label: {
+                Label("Play audio", systemImage: "play.fill")
+            }
+            Button {
+                var map = MojiFieldVariableMap(
                     spell: wordResult.word.spell,
                     pron: wordResult.word.pron,
                     accent: wordResult.word.accent,
                     define: subdetail.title,
                     pos: wordResult.details[0].title,
                     sentence: example.title,
-                    translation: example.trans)
-                showAction.show(map: map)
+                    translation: example.trans
+                )
+                
+                ttsCancellable = Publishers.Zip(
+                    mojiTtsFetchPublisher(tarId: searchResult.id, tarType: 102)
+                        .replaceError(with: ""),
+                    mojiTtsFetchPublisher(tarId: example.id, tarType: 103)
+                        .replaceError(with: "")
+                )
+                .receive(on: RunLoop.main)
+                .sink { _ in
+                    showAction.show(map: map)
+                } receiveValue: { (audio, sentenceAudio) in
+                    map.audio = audio
+                    map.sentenceAudio = sentenceAudio
+                }
             } label: {
                 Label("Add to Anki", systemImage: "plus")
             }
@@ -244,6 +299,12 @@ struct ExampleView: View {
 struct MojiResult_Preview: PreviewProvider {
     static var previews: some View {
         MojiResultView(searchResult: MojiSearchResult(id: "198974907", title: "生きる", excerpt: ""), translationResult: translationResultTestData, wordResult: wordResultTestData)
+    }
+}
+
+struct MojiWord_Preview: PreviewProvider {
+    static var previews: some View {
+        MojiWordView(searchResult: MojiSearchResult(id: "198974907", title: "生きる", excerpt: ""), title: "生きる", wordResult: wordResultTestData, translationResult: translationResultTestData)
     }
 }
 

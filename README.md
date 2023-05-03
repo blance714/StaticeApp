@@ -12,10 +12,12 @@ A iOS application for adding new words to Anki while reading novels.
 
 - 功能
   - [x] 浏览网页
-  - [ ] 改进浏览器
+  - [x] 改进浏览器
     - [x] 增添刷新、前进、后退按钮
     - [x] 增加收藏
-    - [ ] 增加阅读模式
+    - [x] 增加阅读模式
+      - [ ] 添加 AO3
+      - [ ] 添加 poipiku
   - [x] 与Anki交互
     - [x] 获取数据
     - [x] 编辑转换规则 ！
@@ -28,4 +30,4 @@ A iOS application for adding new words to Anki while reading novels.
   - [ ] 增加其他功能？
     - [ ] 增加txt阅读等
     - [ ] 更合逻辑的界面
-    - [ ]　改进词典信息
+    - [ ] 改进词典信息
