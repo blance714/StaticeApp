@@ -22,7 +22,7 @@ struct ReaderModeConfig {
 }
 
 let ReaderModeConfigList: [ReaderModeConfig] = [
-    .init(name: "Pixiv", pattern: /pixiv/, convert: { urlManager in
+    .init(name: "Pixiv", pattern: /www.pixiv.net\/novel\/show.php/, convert: { urlManager in
         Future { promise in
             urlManager.callScript(getPixivDataJS) { result in
                 if let json = try? result.get() as? [String: String],

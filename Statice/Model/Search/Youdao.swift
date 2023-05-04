@@ -61,7 +61,7 @@ func youdaoTranslateSentence(param: String, handler: @escaping (String) -> Void)
                errorCode == 0,
                let translateResults = json["translateResult"] as? [[[String: Any]]]
             {
-                handler(translateResults.map{ $0[0]["tgt"] as? String ?? "" }.joined(separator: ""))
+                handler(translateResults.map{ $0.map { $0["tgt"] as? String ?? ""}.joined() }.joined())
             } else {
                 handler("")
             }

@@ -7,7 +7,21 @@
 
 import SwiftUI
 
-struct ReaderArticleView: UIViewRepresentable {
+func heightForView(text: String, font: UIFont, width: CGFloat) -> CGFloat {
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+    label.numberOfLines = 0
+    label.lineBreakMode = .byWordWrapping
+    label.font = font
+    label.text = text
+    label.sizeToFit()
+    
+    print(label.frame.height)
+    
+    return label.frame.height
+}
+
+struct ReaderArticleUIView: UIViewRepresentable {
+    @Binding var viewHeight: CGFloat
     let article: String
     
     var handleSearch: ((SearchSelection) -> Void)?
@@ -23,23 +37,29 @@ struct ReaderArticleView: UIViewRepresentable {
         uiView.isEditable = false
         uiView.font = .init(name: "Hiragino Mincho ProN", size: 19)
         uiView.backgroundColor = UIColor.clear
-        
-        uiView.delegate = context.coordinator
-        
         uiView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         uiView.isScrollEnabled = false
+        uiView.text = article
+        
+        uiView.delegate = context.coordinator
         
         return uiView
     }
     
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = article
+        
+        DispatchQueue.main.async {
+            let sizeThatFits = uiView.sizeThatFits(CGSize(width: uiView.frame.width, height: .infinity))
+            print(sizeThatFits)
+            viewHeight = sizeThatFits.height
+        }
     }
     
     class Coordinator: NSObject, UITextViewDelegate {
-        let parent: ReaderArticleView
+        let parent: ReaderArticleUIView
         
-        init(_ parent: ReaderArticleView) {
+        init(_ parent: ReaderArticleUIView) {
             self.parent = parent
         }
         
@@ -124,11 +144,25 @@ struct ReaderArticleView: UIViewRepresentable {
     }
 }
 
-struct ReaderArticleView_Previews: PreviewProvider {
-    static var previews: some View {
+struct ReaderArticleView: View {
+    let article: String
+    
+    var handleSearch: ((SearchSelection) -> Void)?
+    var handleTranslate: ((TranslateSelection) -> Void)?
+    
+    @State var viewHeight: CGFloat = 500
+    var body: some View {
         ScrollView {
-            ReaderArticleView(article: readerDataTestData.article, handleSearch: { _ in }, handleTranslate: { _ in })
-//                .padding()
+            ReaderArticleUIView(viewHeight: $viewHeight, article: article, handleSearch: handleSearch, handleTranslate: handleTranslate)
+                .frame(height: viewHeight)
         }
+    }
+    
+}
+
+struct ReaderArticleView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        ReaderArticleView(article: readerDataTestData.article, handleSearch: { _ in }, handleTranslate: { _ in })
     }
 }
